@@ -1,0 +1,190 @@
+{
+  "extends": ["next"],
+  "plugins": ["perfectionist"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "perfectionist/sort-array-includes": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "spread-last": true
+      }
+    ],
+    "perfectionist/sort-classes": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "groups": [
+          "index-signature",
+          "static-property",
+          "private-property",
+          "property",
+          "constructor",
+          "static-method",
+          "private-method",
+          "static-private-method",
+          "method",
+          ["get-method", "set-method"],
+          "unknown"
+        ]
+      }
+    ],
+    "perfectionist/sort-enums": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "partition-by-comment": false
+      }
+    ],
+    "perfectionist/sort-exports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false
+      }
+    ],
+    "perfectionist/sort-imports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": [
+          "type",
+          "react",
+          ["builtin", "external"],
+          "internal-type",
+          "internal",
+          ["parent-type", "sibling-type", "index-type"],
+          ["parent", "sibling", "index"],
+          "object",
+          "unknown",
+          "style"
+        ],
+        "custom-groups": {
+          "value": {
+            "react": ["react", "react-*"]
+          },
+          "type": {
+            "react": "react"
+          }
+        },
+        "internal-pattern": ["@/**"],
+        "newlines-between": "always"
+      }
+    ],
+    "perfectionist/sort-interfaces": [
+      "warn",
+      {
+        "type": "natural",
+        "optionality-order": "required-first",
+        "order": "asc",
+        "ignore-case": false,
+        "groups": ["shorthand", "flag", "unknown", "callback", "multiline"],
+        "custom-groups": {
+          "callback": [
+            "(on|open|close|cancel|set|render)[A-Z]*",
+            "+([a-z])tion"
+          ],
+          "flag": ["is[A-Z_]*", "+([a-z])ed", "success"]
+        },
+        "partition-by-new-line": false
+      }
+    ],
+    "perfectionist/sort-jsx-props": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "groups": ["shorthand", "flag", "unknown", "callback", "multiline"],
+        "custom-groups": {
+          "callback": [
+            "(on|open|close|cancel|set|render)[A-Z]*",
+            "+([a-z])tion"
+          ],
+          "flag": ["is[A-Z_]*", "+([a-z])ed", "success"]
+        }
+      }
+    ],
+    "perfectionist/sort-maps": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false
+      }
+    ],
+    "perfectionist/sort-named-exports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "group-kind": "types-first",
+        "ignore-case": false
+      }
+    ],
+    "perfectionist/sort-named-imports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "group-kind": "types-first",
+        "ignore-case": false,
+        "ignore-alias": false
+      }
+    ],
+    "perfectionist/sort-object-types": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "groups": ["flag", "unknown", "callback", "multiline"],
+        "custom-groups": {
+          "callback": [
+            "(on|open|close|cancel|set|render)[A-Z]*",
+            "+([a-z])tion"
+          ],
+          "flag": ["is[A-Z_]*", "+([a-z])ed", "success"]
+        },
+        "partition-by-new-line": false
+      }
+    ],
+    "perfectionist/sort-objects": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "groups": ["flag", "unknown", "callback", "multiline"],
+        "custom-groups": {
+          "callback": [
+            "(on|open|close|cancel|set|render)[A-Z]*",
+            "+([a-z])tion"
+          ],
+          "flag": ["is[A-Z_]*", "+([a-z])ed", "success"]
+        },
+        "styled-components": false,
+        "partition-by-comment": false,
+        "partition-by-new-line": false
+      }
+    ],
+    "perfectionist/sort-union-types": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "ignore-case": false,
+        "nullable-last": true
+      }
+    ]
+  }
+}
