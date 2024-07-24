@@ -1,0 +1,1 @@
+export const CMS_URL: string = 'https://cms.parallelchain.io';

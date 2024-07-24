@@ -2,16 +2,17 @@ import getArticles from '@/api/get-articles';
 import Image from 'next/image';
 
 export default async function Home() {
-  const _data = await getArticles();
-  if (!_data?.success) {
-    throw 'error';
-  }
+  // const _data = await getArticles();
+  // if (!_data?.success) {
+  //   throw 'error';
+  // }
 
-  const { success, data: articles } = _data;
+  // const { success, data: articles } = _data;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {articles.data.map((article) => {
+      text
+      {/* {articles.data.map((article) => {
         return (
           <div key={article.id}>
             <Image
@@ -25,7 +26,7 @@ export default async function Home() {
             <div>{article.attributes.title}</div>;
           </div>
         );
-      })}
+      })} */}
     </main>
   );
 }

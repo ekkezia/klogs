@@ -1,0 +1,20 @@
+export const INNER_BAR_WIDTH: string = '200px';
+export const INNER_BAR_WIDTH_LG: string = '96px';
+export const INNER_BAR_WIDTH_SM: string = '48px';
+export const OUTER_BAR_WIDTH: string = '48px';
+export const OUTER_BAR_WIDTH_SM: string = '32px';
+export const OUTER_BAR_WIDTH_LG: string = '32px';
+export const HORIZONTAL_BAR_HEIGHT: string = '48px';
+export const MAXWIDTH: string = '1440px';
+export const MAX_CONTENT_WIDTH: string = `calc(100% - (${OUTER_BAR_WIDTH} * 2) - (${INNER_BAR_WIDTH} * 1))`;
+export const MAX_CONTENT_WRITE_WIDTH: string = `calc(100% - (${OUTER_BAR_WIDTH} * 2) - (${INNER_BAR_WIDTH} * 2))`;
+export const MAX_CONTENT_WRITE_WIDTH_LG: string = `calc(100% - (${OUTER_BAR_WIDTH_LG} * 2) - (${INNER_BAR_WIDTH_LG} * 2))`;
+export const MAX_CONTENT_WRITE_WIDTH_SM: string = `calc(100% - (${INNER_BAR_WIDTH_SM} * 1))`;
+export const MAX_CONTENT_VIEWPORT_HEIGHT: string = `calc(100vh - (${HORIZONTAL_BAR_HEIGHT} * 2))`;
+export const HEADING_HEIGHT = '100px';
+
+export const Z_INDEX_BASE = 0;
+export const Z_INDEX_ABOVE = 1;
+export const Z_INDEX_BELOW = -1;
+export const Z_INDEX_FIXED_BARS = 10;
+export const Z_INDEX_MODAL = 999;
