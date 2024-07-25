@@ -7,6 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    borderWidth: {
+      DEFAULT: '0.2px',
+    },
     extend: {
       colors: {
         primary: {

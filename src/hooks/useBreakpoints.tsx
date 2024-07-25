@@ -1,14 +1,14 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+'use client'
+
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const useBreakpoints = () => {
-  const theme = useTheme();
-
-  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.down('xl'));
-  const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down('xs'));
-  const isExtraExtraSmallScreen = useMediaQuery('@media (max-width: 375px)');
+  const isExtraLargeScreen = useMediaQuery("only screen and (max-width : 1440px)");
+  const isLargeScreen = useMediaQuery("only screen and (max-width : 1200px)");
+  const isMediumScreen = useMediaQuery("only screen and (max-width : 900px)");
+  const isSmallScreen = useMediaQuery("only screen and (max-width : 600px)");
+  const isExtraSmallScreen = useMediaQuery("only screen and (max-width : 425px)");
+  const isExtraExtraSmallScreen = useMediaQuery("only screen and (max-width : 375px)");
 
   let size;
   if (isExtraLargeScreen) size = 'xl';

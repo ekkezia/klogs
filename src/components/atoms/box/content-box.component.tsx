@@ -28,7 +28,7 @@ const ContentBox: React.FC<IContentBoxProps> = ({
     <div className={
       twMerge(
         sticky ? "sticky z-10" : "relative",
-        noBorderBottom ? '' : 'border-b-2 border-b-primary',
+        noBorderBottom ? '' : 'border-b border-b-primary',
         'w-full h-fit flex'
       )
     }
@@ -37,7 +37,7 @@ const ContentBox: React.FC<IContentBoxProps> = ({
       }}
     >
       <div
-        className="flex justify-end border-r-2 border-primary"
+        className="flex justify-end border-r border-primary"
         style={{
           width: INNER_BAR_WIDTH,
           minWidth: INNER_BAR_WIDTH,

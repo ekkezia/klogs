@@ -1,10 +1,8 @@
-/** @jsxImportSource @emotion/react */
+'use client'
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { css } from '@emotion/react';
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import { IFunction } from '../../../../types/shared';
 
 type variantOptions = 'primary' | 'secondary';
 
@@ -16,11 +14,12 @@ interface ICustomButtonProps {
   customColor?: string;
   fitContent?: boolean;
   limitHeight?: boolean;
-  action?: IFunction;
+  action?: () => void;
   disabled?: boolean;
   icon?: string;
   noBorder?: boolean;
   testId?: string;
+  children: React.ReactElement | string;
 }
 
 const CustomButton: React.FC<ICustomButtonProps> = ({
@@ -38,222 +37,95 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
   noBorder,
   testId,
 }) => {
-  const theme = useTheme();
 
-  const styles = {
-    btn: css`
-      width: fit-content;
-      height: fit-content;
-      padding: ${theme.spacing(1)} ${theme.spacing(2)};
-      font-family: Barlow;
-      font-size: 14px;
-      text-transform: uppercase;
-      font-weight: 700;
-      display: flex;
-      justify-content: ${icon ? 'space-between' : 'center'};
-      align-items: center;
-      text-decoration: none;
-      // @media (max-width: 600px) {
-      //   font-size: 12px;
-      // }
-    `,
-    link: css`
-      width: fit-content;
-      height: fit-content;
-    `,
-    stretched: css`
-      width: 100%;
-      height: 100%;
-      max-height: ${limitHeight ? '48px' : 'none'};
-    `,
-    primary: css`
-      color: ${theme.palette.PCLab?.text?.contrast};
-      background: ${customColor ??
-      theme.palette.PCLab?.primary?.default}; // default custom color is blue
-      border: 1px solid grey;
-      border-width: ${noBorder ? '0px' : '1px'};
-      border-style: solid;
-      border-color: ${customColor ??
-      theme.palette.PCLab?.primary?.default}; // default custom color is blue
-      cursor: pointer;
-      .icon {
-        filter: invert(100%);
-      }
-      &:hover {
-        color: ${customColor ??
-        theme.palette.PCLab?.primary?.default}; // default custom color is blue
-        background: ${theme.palette.PCLab?.background?.primary};
-        border-width: ${noBorder ? '0px' : '1px'};
-        border-style: solid;
-        border-color: ${customColor ?? theme.palette.PCLab?.primary?.default};
-        .icon {
-          filter: ${theme.palette.PCLab?.primary?.defaultFilter};
-        }
-      }
-    `,
-    secondary: css`
-      color: ${darkMode
-        ? theme.palette.PCLab?.text?.contrast
-        : theme.palette.PCLab?.text?.primary};
-      background: none;
-      border-width: ${noBorder ? '0px' : '1px'};
-      border-style: solid;
-      border-color: ${darkMode
-        ? theme.palette.PCLab?.tertiary?.default
-        : theme.palette.PCLab?.neutral?.black};
-      cursor: pointer;
-      .icon {
-        filter: invert(25%) sepia(22%) saturate(1336%) hue-rotate(170deg)
-          brightness(94%) contrast(91%);
-      }
-
-      &:hover {
-        color: ${theme.palette.PCLab?.text?.contrast};
-        background: ${theme.palette.PCLab?.text?.primary};
-        .icon {
-          filter: invert(100%);
-        }
-      }
-    `,
-    disabled: css`
-      color: ${theme.palette.PCLab?.text?.contrast};
-      background: ${theme.palette.PCLab?.primary
-        ?.default}; // default custom color is blue
-      // border-width: 0px 1px 0px 0px;
-      // border-style: solid;
-      // border-color: ${theme.palette.PCLab?.tertiary?.default};
-      opacity: 0.5;
-      cursor: not-allowed;
-      .icon {
-        filter: invert(25%) sepia(22%) saturate(1336%) hue-rotate(170deg)
-          brightness(94%) contrast(91%);
-      }
-    `,
+  const baseStyles = "flex items-center justify-center text-white font-bold uppercase text-sm";
+  const dynamicStyles = {
+    width: fitContent ? 'auto' : '100%',
+    maxHeight: limitHeight ? '48px' : 'none',
+    borderColor: noBorder ? 'transparent' : customColor || 'gray',
+    backgroundColor: disabled
+      ? (customColor || 'blue') + '80' // Adjust opacity for disabled state
+      : customColor || (variant === 'primary' ? 'blue' : 'transparent'),
+    color: disabled
+      ? 'white'
+      : (variant === 'primary' ? 'white' : darkMode ? 'white' : 'black'),
+    cursor: disabled ? 'not-allowed' : 'pointer',
   };
 
-  function getVariant() {
-    switch (variant) {
-      case 'primary':
-        return styles.primary;
-      case 'secondary':
-        return styles.secondary;
-    }
-  }
+  const hoverStyles = !disabled
+    ? `hover:bg-${variant === 'primary' ? 'gray-300' : 'black'} hover:text-${variant === 'primary' ? 'black' : 'white'}`
+    : '';
 
-  const variantCss = getVariant();
+  const commonButtonClasses = `${baseStyles} ${hoverStyles} border ${noBorder ? 'border-0' : 'border-solid'} ${icon ? 'space-x-2' : ''}`;
+  
+  const content = (
+    <>
+      {children}
+      {icon && (
+        <Image
+          src={`/images/icons/button/${icon}`}
+          width={16}
+          height={16}
+          alt="Button icon"
+          className="icon"
+        />
+      )}
+    </>
+  );
 
-  if (disabled)
+  if (disabled) {
     return (
       <button
-        type="submit"
-        css={css`
-          ${styles.btn};
-          ${fitContent ? '' : styles.stretched};
-          ${styles.disabled}
-        `}
-        disabled={disabled}
+        type="button"
+        style={dynamicStyles}
+        className={`${commonButtonClasses} opacity-50`}
+        disabled
         data-testid={testId}
       >
-        {children}
-        {icon && (
-          <Image
-            src={`/images/icons/button/${icon}`}
-            width={16}
-            height={16}
-            alt="External link"
-            className="icon"
-          />
-        )}
+        {content}
       </button>
     );
+  }
 
-  // For action/handling function related button
-  if (!url)
+  if (!url) {
     return (
       <button
-        type="submit"
-        css={css`
-          ${styles.btn};
-          ${variantCss};
-          ${fitContent ?? styles.stretched};
-        `}
+        type="button"
+        style={dynamicStyles}
         onClick={action}
+        className={commonButtonClasses}
         data-testid={testId}
       >
-        {children}
-        {icon && (
-          <Image
-            src={`/images/icons/button/${icon}`}
-            width={16}
-            height={16}
-            alt="External link"
-            className="icon"
-          />
-        )}
+        {content}
       </button>
     );
-  else {
-    if (!newTab && url) {
-      return (
-        <Link href={url}>
-          <button
-            type="submit"
-            css={css`
-              ${styles.btn};
-              ${variantCss};
-              ${fitContent ?? styles.stretched};
-            `}
-            data-testid={testId}
-          >
-            {children}
-            {icon && (
-              <Image
-                src={`/images/icons/button/${icon}`}
-                width={16}
-                height={16}
-                alt="External link"
-                className="icon"
-              />
-            )}
-          </button>
-        </Link>
-      );
-    }
   }
 
-  // default is external link or newTab
+  if (!newTab) {
+    return (
+      <Link href={url} passHref>
+        <button
+          type="button"
+          style={dynamicStyles}
+          className={commonButtonClasses}
+          data-testid={testId}
+        >
+          {content}
+        </button>
+      </Link>
+    );
+  }
+
   return (
     <a
       href={url}
-      target={newTab ? '_blank' : '_self'}
+      target="_blank"
       rel="noreferrer"
-      css={css`
-        ${styles.link};
-        ${fitContent ?? styles.stretched};
-      `}
+      style={dynamicStyles}
+      className={commonButtonClasses}
+      data-testid={testId}
     >
-      <button
-        type="submit"
-        css={css`
-          ${styles.btn};
-          ${variantCss};
-          ${fitContent ?? styles.stretched};
-        `}
-        data-testid={testId}
-      >
-        {children}
-        {icon && (
-          <div>
-            <Image
-              src={`/images/icons/button/${icon ?? `external-link-icon.svg`}`}
-              width={16}
-              height={16}
-              alt="External link"
-              className="icon"
-            />
-          </div>
-        )}
-      </button>
+      {content}
     </a>
   );
 };

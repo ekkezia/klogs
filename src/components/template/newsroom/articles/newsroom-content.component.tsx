@@ -1,17 +1,16 @@
-'use server'
+"use client"
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import { useRouter, useSearchParams } from "next/navigation"
+import React, { useState } from "react"
 
-import NewsroomFilters from './searchbar/newsroom-filters.component';
-import SearchBar from './searchbar/searchbar.component';
-import NewsGrid from './articles-block/news-grid.component';
-import NewsPagination from './articles-block/news-pagination.component';
-import ContentBox from '../../../atoms/box/content-box.component';
-import { useQueryParams } from '../../../../hooks/useQueryParams';
-import { SanityDocument } from 'next-sanity';
+import NewsroomFilters from "./searchbar/newsroom-filters.component"
+import SearchBar from "./searchbar/searchbar.component"
+import NewsGrid from "./articles-block/news-grid.component"
+import NewsPagination from "./articles-block/news-pagination.component"
+import { useQueryParams } from "../../../../hooks/useQueryParams"
+import { SanityDocument } from "next-sanity"
 
-import { sanityFetch } from '@/sanity/client';
+import { sanityFetch } from "@/sanity/client"
 
 const EVENTS_QUERY = `*[_type == "tour"]{
   _id, 
@@ -20,20 +19,19 @@ const EVENTS_QUERY = `*[_type == "tour"]{
   ticketLink, 
   title, 
   slug
-}|order(date desc)`;
+}|order(date desc)`
 
-export const NEWS_PER_PAGE = 6;
-export const DEFAULT_PAGE = 1;
+export const NEWS_PER_PAGE = 6
+export const DEFAULT_PAGE = 1
 
-async const NewsroomContent: React.FC = () => {
-  const concerts = await sanityFetch<SanityDocument[]>({
-    query: EVENTS_QUERY,
-  });
+const NewsroomContent: React.FC = () => {
+  // const concerts = await sanityFetch<SanityDocument[]>({
+  //   query: EVENTS_QUERY,
+  // });
 
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const query = searchParams.get('paramName'); // Replace 'paramName' with your query parameter key
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  // const query = searchParams.get('paramName'); // Replace 'paramName' with your query parameter key
 
   // let search = query.search ? query.search.split(/\+|%2B/g) : '';
   // if (query.search && query.search.length > 0) {
@@ -47,10 +45,10 @@ async const NewsroomContent: React.FC = () => {
   // };
   // const { queryParams, setQueryParams } = useQueryParams(router, params);
 
-  const [articles, setArticles] = useState([]); // todo: change to server
+  const [articles, setArticles] = useState([]) // todo: change to server
   // const [activeFilters, setActiveFilters] = useState(['ALL']);
   // const [totalCount, setTotalCount] = useState(0);
-  const [loading, setLoading] = useState(false); // todo: change to loading cache
+  const [loading, setLoading] = useState(false) // todo: change to loading cache
   // const [countLoading, setCountLoading] = useState(false);
 
   // const fetchData = async (params) => {
@@ -148,48 +146,38 @@ async const NewsroomContent: React.FC = () => {
   // };
 
   return (
-    <ContentBox
-      mainContent={
-        <div>
-          <div
-            className="flex items-center"
-          >
-            <div className="pl-2 w-full h-[40px] flex items-center">
-              <h6
-                className="h6 text-secondary"
-              >
-                Latest Stories
-              </h6>
-            </div>
-            <div className="flex justify-end">
-              filters
-              {/* <NewsroomFilters
-                activeFilters={activeFilters}
-                setActiveFilters={setActiveFilters}
-                handleFiltersChange={handleFiltersChange}
-              /> */}
-            </div>
-          </div>
-          <div className="flex w-full h-[40px] bg-white">
-            searchbar
-            {/* <SearchBar
-              search={queryParams.search}
-              setSearch={setSearch}
-              handleSearch={handleSearch}
-              loading={loading}
-            /> */}
-          </div>
-          <NewsGrid articles={articles} loading={loading} />
-          {/* <NewsPagination
-            pagesCount={Math.ceil(totalCount / NEWS_PER_PAGE)}
-            page={queryParams.page}
-            onPageChange={handlePageChange}
-            loading={countLoading}
-          /> */}
+    <div>
+      <div className="flex items-center">
+        <div className="flex h-[40px] w-full items-center pl-2">
+          <h6 className="h6 text-secondary">Latest Stories</h6>
         </div>
-      }
-    />
-  );
-};
+        <div className="flex justify-end">
+          filters
+          {/* <NewsroomFilters
+          activeFilters={activeFilters}
+          setActiveFilters={setActiveFilters}
+          handleFiltersChange={handleFiltersChange}
+        /> */}
+        </div>
+      </div>
+      <div className="flex h-[40px] w-full bg-white">
+        searchbar
+        {/* <SearchBar
+        search={queryParams.search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+        loading={loading}
+      /> */}
+      </div>
+      <NewsGrid articles={articles} loading={loading} />
+      {/* <NewsPagination
+      pagesCount={Math.ceil(totalCount / NEWS_PER_PAGE)}
+      page={queryParams.page}
+      onPageChange={handlePageChange}
+      loading={countLoading}
+    /> */}
+    </div>
+  )
+}
 
-export default NewsroomContent;
+export default NewsroomContent

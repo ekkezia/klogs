@@ -56,7 +56,7 @@ const InteractiveCssCubes: React.FC<IInteractiveCssCubesProps> = ({
   return (
     <div className="absolute top-0 left-0 flex flex-wrap justify-center items-center" ref={containerRef}>
       {[...Array(numberOfCubes.x * numberOfCubes.y)].map((_, index) => {
-        return <div key={index} className="cube border border-primary duration-1000 cursor-pointer bg-white hover:bg-primary-lighter" 
+        return <div key={index} className="cube border border-t-[0.5] border-r-[0.5] border-b-[0.5] border-l-[0.5] border-primary duration-1000 cursor-pointer bg-white hover:bg-primary-lighter" 
         style={{
           width: cubeSize,
           height: cubeSize

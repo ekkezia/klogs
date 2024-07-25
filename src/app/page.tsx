@@ -10,7 +10,7 @@ export const CONTENT_TOP_SM = '35vh';
 
 export default function Home() {
   return (
-    <div className="h-[200vh] bg-white">
+    <div className="h-[200vh]">
       <LandingPageAnimation />
       <LandingPageHero />
       <div className="relative top-[100vh]">

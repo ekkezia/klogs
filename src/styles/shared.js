@@ -1,17 +1,18 @@
-export const INNER_BAR_WIDTH = '200px';
-export const INNER_BAR_WIDTH_LG = '96px';
-export const INNER_BAR_WIDTH_SM = '48px';
-export const OUTER_BAR_WIDTH = '48px';
-export const OUTER_BAR_WIDTH_SM = '32px';
-export const OUTER_BAR_WIDTH_LG = '32px';
-export const HORIZONTAL_BAR_HEIGHT = '48px';
-export const MAXWIDTH = '1440px';
-export const MAX_CONTENT_WIDTH = `calc(100% - (${OUTER_BAR_WIDTH} * 2) - (${INNER_BAR_WIDTH} * 1))`;
+export const INNER_BAR_WIDTH = '12rem'; // 192px
+export const INNER_BAR_WIDTH_LG = '6rem'; // 96px
+export const INNER_BAR_WIDTH_SM = '3rem'; // 48px
+export const OUTER_BAR_WIDTH = '3rem'; // 48px
+export const OUTER_BAR_WIDTH_SM = '2rem'; // 32px
+export const OUTER_BAR_WIDTH_LG = '2rem'; // 32px
+export const HORIZONTAL_BAR_HEIGHT = '3rem'; // 48px
+export const MAXWIDTH = '90rem'; // 1440px
+export const MAX_CONTENT_WIDTH = `calc(100% - (${OUTER_BAR_WIDTH} * 2) - ${INNER_BAR_WIDTH})`;
 export const MAX_CONTENT_WRITE_WIDTH = `calc(100% - (${OUTER_BAR_WIDTH} * 2) - (${INNER_BAR_WIDTH} * 2))`;
 export const MAX_CONTENT_WRITE_WIDTH_LG = `calc(100% - (${OUTER_BAR_WIDTH_LG} * 2) - (${INNER_BAR_WIDTH_LG} * 2))`;
-export const MAX_CONTENT_WRITE_WIDTH_SM = `calc(100% - (${INNER_BAR_WIDTH_SM} * 1))`;
+export const MAX_CONTENT_WRITE_WIDTH_SM = `calc(100% - ${INNER_BAR_WIDTH_SM})`;
 export const MAX_CONTENT_VIEWPORT_HEIGHT = `calc(100vh - (${HORIZONTAL_BAR_HEIGHT} * 2))`;
-export const HEADING_HEIGHT = '100px';
+export const HEADING_HEIGHT = '6.25rem'; // 100px
+
 
 export const Z_INDEX_BASE = 0;
 export const Z_INDEX_ABOVE = 1;

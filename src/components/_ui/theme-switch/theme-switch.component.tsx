@@ -1,121 +1,65 @@
-/** @jsxImportSource @emotion/react */
-// @ts-nocheck
-import { css } from '@emotion/react';
-import React, { useContext, useEffect, useState } from 'react';
-import { useTheme } from '@mui/material';
-import { PLabThemeContext } from '../../../utils/createContext';
-import { blueTheme, greenTheme, orangeTheme } from '../../../styles/theme';
+"use client"
 
-type IFunction = (...args: any[]) => any;
+import React, { useEffect, useState } from "react"
+import { useThemeContext } from "@/contexts/theme-context"
 
-type IColorVariant = 'blue' | 'orange' | 'green';
+type IFunction = (...args: any[]) => any
+
+type IColorVariant = "blue" | "orange" | "green"
 
 interface IThemeSwitch {
-  colorVariant: string;
-  onClick: IFunction;
-  active: boolean;
+  colorVariant: string
+  onClick: IFunction
+  active: boolean
 }
 
-const ThemeSwitch: React.FC<IThemeSwitch> = ({
-  colorVariant,
-  onClick,
-  active,
-}) => {
-  const theme = useTheme();
-  const styles = {
-    switch: css`
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      cursor: pointer;
-      &:hover {
-        border: 2px solid ${theme.palette.PCLab?.primary?.lighter};
-        filter: brightness(150%);
-      }
-    `,
-    blue: css`
-      background: ${theme.palette.PCLab?.brand?.blue};
-    `,
-    orange: css`
-      background: ${theme.palette.PCLab?.brand?.orange};
-    `,
-    green: css`
-      background: ${theme.palette.PCLab?.brand?.green};
-    `,
-    active: css`
-      width: 18px;
-      height: 18px;
-      border: 2px solid ${theme.palette.PCLab?.primary?.lighter};
-    `,
-  };
+const colorClasses: {[key: string]: string} = {
+  blue: 'bg-blue-500',
+  orange: 'bg-orange-500',
+  green: 'bg-green-500',
+};
 
-  function getColorVariant() {
-    switch (colorVariant) {
-      case 'blue':
-        return styles.blue;
-      case 'orange':
-        return styles.orange;
-      case 'green':
-        return styles.green;
-    }
-  }
-
-  const colorVariantCss = getColorVariant();
+const ThemeSwitch: React.FC<IThemeSwitch> = ({ colorVariant, onClick, active }) => {
 
   return (
     <>
       <div
-        css={css`
-          ${styles.switch};
-          ${colorVariantCss};
-          ${active && styles.active};
-        `}
+        className={`h-4 w-4 cursor-pointer rounded-full transition-all duration-200 ${colorClasses[colorVariant]} ${active ? "h-5 w-5 border-2 border-blue-300" : ""}`}
         onClick={() => onClick()}
       />
     </>
-  );
-};
+  )
+}
 
 const ThemeSwitches: React.FC = () => {
-  const { setUserTheme } = useContext(PLabThemeContext);
-  const theme = useTheme();
-  const styles = {
-    container: css`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: ${theme.spacing(1)} ${theme.spacing(1)};
-      gap: ${theme.spacing(1)};
-      flex-wrap: wrap;
-    `,
-  };
+  const { setUserTheme } = useThemeContext()
 
-  const COLOR_VARIANTS = ['blue', 'orange', 'green'];
+  const COLOR_VARIANTS = ["blue", "orange", "green"]
 
-  const [activeThemeSwitch, setActiveThemeSwitch] = useState('blue');
+  const [activeThemeSwitch, setActiveThemeSwitch] = useState("blue")
   const handleSelectTheme = (variant: string) => {
-    setActiveThemeSwitch(variant);
-  };
+    setActiveThemeSwitch(variant)
+  }
 
   function getUserTheme() {
     switch (activeThemeSwitch) {
-      case 'blue':
-        return blueTheme;
-      case 'orange':
-        return orangeTheme;
-      case 'green':
-        return greenTheme;
+      case "blue":
+        return "blueTheme"
+      case "orange":
+        return "orangeTheme"
+      case "green":
+        return "greenTheme"
       default:
-        return theme;
+        return "theme"
     }
   }
 
   useEffect(() => {
-    setUserTheme(getUserTheme());
-  }, [activeThemeSwitch]);
+    setUserTheme(getUserTheme())
+  }, [activeThemeSwitch])
 
   return (
-    <div css={styles.container}>
+    <div className="flex flex-wrap items-center justify-center gap-2 p-2">
       {COLOR_VARIANTS.map((variant, index) => {
         return (
           <ThemeSwitch
@@ -124,10 +68,10 @@ const ThemeSwitches: React.FC = () => {
             onClick={() => handleSelectTheme(variant)}
             key={index}
           />
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default ThemeSwitches;
+export default ThemeSwitches

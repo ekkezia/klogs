@@ -1,7 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
+import React from "react"
 import {
   HORIZONTAL_BAR_HEIGHT,
   MAXWIDTH,
@@ -10,152 +7,44 @@ import {
   INNER_BAR_WIDTH_SM,
   OUTER_BAR_WIDTH_LG,
   INNER_BAR_WIDTH_LG,
-  Z_INDEX_FIXED_BARS,
-} from '../Layout';
-import Footer from '../../organism/footer/footer.component';
+} from "@/styles/shared"
+import Footer from "../../organism/footer/footer.component"
 
 const BottomBar: React.FC = () => {
-  const theme = useTheme();
-
-  const styles = {
-    container: css`
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: ${Z_INDEX_FIXED_BARS};
-      width: 100vw;
-      height: ${HORIZONTAL_BAR_HEIGHT};
-      display: flex;
-      justify-content: center;
-      border-top: 1px solid ${theme.palette?.PCLab?.tertiary?.default};
-    `,
-    innerContainer: css`
-      width: 100%;
-      max-width: ${MAXWIDTH};
-      height: ${HORIZONTAL_BAR_HEIGHT};
-      display: flex;
-    `,
-    backdropFilter: css`
-      backdrop-filter: blur(4px);
-      background: ${theme.palette?.PCLab?.background?.transparent};
-    `,
-    logoContainer: css`
-      width: 100%;
-      height: 100%;
-      max-height: ${HORIZONTAL_BAR_HEIGHT};
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `,
-    outerLeftBar: css`
-      width: ${OUTER_BAR_WIDTH};
-      min-width: ${OUTER_BAR_WIDTH};
-      max-width: ${OUTER_BAR_WIDTH};
-      height: 100%;
-      border-right: 1px solid ${theme.palette?.PCLab?.tertiary?.default};
-      display: block;
-      @media (max-width: 1200px) {
-        min-width: ${OUTER_BAR_WIDTH_LG};
-        width: ${OUTER_BAR_WIDTH_LG};
-      }
-      @media (max-width: 600px) {
-        display: none;
-      }
-    `,
-    innerLeftBar: css`
-      width: ${INNER_BAR_WIDTH};
-      min-width: ${INNER_BAR_WIDTH};
-      max-width: ${INNER_BAR_WIDTH};
-      height: 100%;
-      border-right: 1px solid ${theme.palette?.PCLab?.tertiary?.default};
-      @media (max-width: 1200px) {
-        min-width: ${INNER_BAR_WIDTH_LG};
-        width: ${INNER_BAR_WIDTH_LG};
-      }
-      @media (max-width: 600px) {
-        min-width: ${INNER_BAR_WIDTH_SM};
-        width: ${INNER_BAR_WIDTH_SM};
-      }
-    `,
-    innerRightBar: css`
-      width: ${INNER_BAR_WIDTH};
-      min-width: ${INNER_BAR_WIDTH};
-      max-width: ${INNER_BAR_WIDTH};
-      height: 100%;
-      border-left: 1px solid ${theme.palette?.PCLab?.tertiary?.default};
-      @media (max-width: 1200px) {
-        min-width: ${INNER_BAR_WIDTH_LG};
-        width: ${INNER_BAR_WIDTH_LG};
-      }
-      @media (max-width: 600px) {
-        min-width: ${INNER_BAR_WIDTH_SM};
-        width: ${INNER_BAR_WIDTH_SM};
-      }
-      @media (max-width: 425px) {
-        display: none;
-      }
-    `,
-    outerRightBar: css`
-      width: ${OUTER_BAR_WIDTH};
-      min-width: ${OUTER_BAR_WIDTH};
-      max-width: ${OUTER_BAR_WIDTH};
-      height: 100%;
-      border-left: 1px solid ${theme.palette?.PCLab?.tertiary?.default};
-      display: block;
-      @media (max-width: 1200px) {
-        min-width: ${OUTER_BAR_WIDTH_LG};
-        width: ${OUTER_BAR_WIDTH_LG};
-      }
-      @media (max-width: 600px) {
-        display: none;
-      }
-    `,
-    contentBar: css`
-      width: 100%;
-    `,
-  };
-
   return (
-    <div css={styles.container}>
-      <div css={styles.innerContainer}>
+    <div
+      className="fixed bottom-0 left-0 z-[Z_INDEX_FIXED_BARS] w-screen border-t border-primary bg-white"
+      style={{ height: HORIZONTAL_BAR_HEIGHT }}
+    >
+      <div className="flex w-full" style={{ maxWidth: MAXWIDTH, height: HORIZONTAL_BAR_HEIGHT }}>
         <div
-          css={css`
-            ${styles.outerLeftBar};
-          `}
+          className={`h-full border-r border-primary`}
+          style={{ width: OUTER_BAR_WIDTH }}
         />
 
         <div
-          css={css`
-            ${styles.innerLeftBar};
-            ${styles.backdropFilter};
-          `}
+          className={`h-full border-r border-primary ${INNER_BAR_WIDTH} ${INNER_BAR_WIDTH_LG} ${INNER_BAR_WIDTH_SM}`}
+          style={{
+            width: INNER_BAR_WIDTH,
+          }}
         />
 
-        <div
-          css={css`
-            ${styles.contentBar};
-            ${styles.backdropFilter};
-          `}
-        >
+        <div className="flex-1">
           <Footer />
         </div>
 
         <div
-          css={css`
-            ${styles.innerRightBar};
-          `}
-        >
-          {/* {navbar} */}
-        </div>
+          className={`h-full border-l border-primary ${INNER_BAR_WIDTH} ${INNER_BAR_WIDTH_LG} ${INNER_BAR_WIDTH_SM}`}
+          style={{ width: INNER_BAR_WIDTH }}
+        />
 
         <div
-          css={css`
-            ${styles.outerRightBar};
-          `}
+          className={`h-full border-l border-primary ${OUTER_BAR_WIDTH} ${OUTER_BAR_WIDTH_LG} hidden lg:block`}
+          style={{ width: OUTER_BAR_WIDTH }}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BottomBar;
+export default BottomBar
