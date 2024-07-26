@@ -1,8 +1,6 @@
 "use client"
 
 import Clock from "@/components/_ui/clock"
-import CustomCountUp from "@/components/_ui/count-up/custom-count-up.component"
-import FreeDrawing from "@/components/_ui/free-drawing"
 import useBoolean from "@/hooks/useBoolean"
 import useScrollPosition from "@/hooks/useScrollPosition"
 import getCurrentDate, { formatDate } from "@/utils/dates"
@@ -12,25 +10,23 @@ export const ANIMATION_DURATION = 1
 
 const LandingPageHero: React.FC = () => {
   const textContainerRef = useRef() as RefObject<HTMLDivElement>
-  const scrollTextRef = useRef() as RefObject<HTMLDivElement>
-  const countUpRef = useRef() as RefObject<HTMLDivElement>
 
   const { scrollPosition } = useScrollPosition()
 
-  const {
-    setTrue: setCountUpIsFinished,
-    setFalse: setCountUpIsNotFinished,
-    value: countUpIsFinished,
-  } = useBoolean(false)
+  // const {
+  //   setTrue: setCountUpIsFinished,
+  //   setFalse: setCountUpIsNotFinished,
+  //   value: countUpIsFinished,
+  // } = useBoolean(false)
 
-  const handleCountUpIsFinished = () => {
-    setTimeout(
-      () => {
-        setCountUpIsFinished()
-      },
-      (ANIMATION_DURATION / 10) * 1000
-    )
-  }
+  // const handleCountUpIsFinished = () => {
+  //   setTimeout(
+  //     () => {
+  //       setCountUpIsFinished()
+  //     },
+  //     (ANIMATION_DURATION / 10) * 1000
+  //   )
+  // }
 
   useEffect(() => {
     if (textContainerRef.current) {
@@ -57,7 +53,6 @@ const LandingPageHero: React.FC = () => {
         
         <p className="body1">as of {formatDate(getCurrentDate())}</p>
       </div>
-      <FreeDrawing className="absolute" />
     </main>
   )
 }

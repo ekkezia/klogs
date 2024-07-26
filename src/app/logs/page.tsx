@@ -1,7 +1,5 @@
 import React from "react"
 import fetchAllArticles from "@/lib/data/fetch-all-articles"
-import { formatDate } from "@/utils/dates"
-import { sanityImage } from "@/sanity/image-builder"
 import { LogsImageContextProvider } from "@/contexts/logs-image-context"
 import LogsImage from "@/components/_ui/logs-image"
 import LogsTitle from "@/components/_ui/logs-title"

@@ -2,43 +2,26 @@ import React from 'react';
 import { OUTER_BAR_WIDTH } from '@/styles/shared';
 import Link from 'next/link';
 
-const SOCIAL_LINKS = Object.freeze([
+const MENU = Object.freeze([
   {
-    name: 'email',
-    url: 'mailto:e.kezia@gmail.com',
-    symbol: 'E',
-  },
-  {
-    name: 'linkedin',
-    url: 'https://www.linkedin.com/company/parallelchain-lab',
-    symbol: 'L',
-  },
-    {
-    name: 'instagram',
-    url: 'https://instagram.com/ekezia',
-    symbol: 'I',
+    name: 'home',
+    url: '/',
+    symbol: '🏠',
   },
   {
-    name: 'portfolio',
-    url: 'https://e-kezia.com',
-    symbol: 'Z',
-  },
-    {
-    name: 'github',
-    url: 'https://github.com/parallelchain-io',
-    symbol: 'K',
+    name: 'note',
+    url: '/logs',
+    symbol: '🗒️',
   },
 ]);
 
-const Socials: React.FC = () => {
+const Menu: React.FC = () => {
   return (
     <div className="fixed top-1/2 transform -translate-y-1/2 flex flex-col items-center">
-      {SOCIAL_LINKS.map(({ name, url, symbol }) => (
+      {MENU.map(({ name, url, symbol }) => (
         <Link
         passHref
           href={url}
-          target="_blank"
-          rel="noreferrer"
           key={name}
           className={`flex items-center justify-center relative border-b first:border-t border-primary hover:bg-secondary`}
           style={{
@@ -53,4 +36,4 @@ const Socials: React.FC = () => {
   );
 };
 
-export default Socials;
+export default Menu;

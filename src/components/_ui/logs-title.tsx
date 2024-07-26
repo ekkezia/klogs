@@ -19,7 +19,7 @@ const LogsTitle: React.FC<{ article: TArticle; index: number }> = ({ article, in
   return (
     <Link href={`/logs/${article._id}`} passHref>
       <div
-        className="flex w-full cursor-pointer border-b border-primary text-primary duration-1000 hover:bg-secondary"
+        className="flex w-full cursor-pointer border-b border-primary text-primary duration-1000 bg-transparent hover:bg-secondary"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

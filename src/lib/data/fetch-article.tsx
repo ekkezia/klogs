@@ -2,7 +2,7 @@ import { TArticle } from "@/types/article-types"
 import { API_BASE_URL } from "../../../api"
 
 export default async function fetchArticle(id: string) {
-  const res = await fetch(`${API_BASE_URL}/api/article/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/api/articles/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

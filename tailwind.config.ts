@@ -69,7 +69,7 @@ const config: Config = {
           fontFamily: "var(--font-monoton)",
           fontSize: '24px',
           fontWeight: '400',
-          lineHeight: '36px'
+          lineHeight: '36px',
         },
 
         ".body3": {
@@ -104,8 +104,9 @@ const config: Config = {
 
         ".h4": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: '20px',
+          fontSize: '24px',
           fontWeight: '700',
+          lineHeight: '36px',
         },
       })
     }),

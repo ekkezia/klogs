@@ -4,8 +4,8 @@ import Link from "next/link"
 
 export const ANIMATION_DURATION = 1
 
-const LogsButton: React.FC = async () => {
-  const articleCount = await fetchArticlesCount()
+const LogsButton: React.FC = () => {
+  // const articleCount = await fetchArticlesCount()
 
   // const {
   //   setTrue: setCountUpIsFinished,
@@ -24,10 +24,10 @@ const LogsButton: React.FC = async () => {
 
   return (
     <Link href="/logs" passHref>
-      <button className="flex w-full items-center justify-between px-4 hover:bg-secondary">
+      <button className="flex w-full h-[48px] items-center justify-between px-4 hover:bg-secondary">
         <p className="h3 text-primary">Logs</p>
 
-        {articleCount ? <CustomCountUp number={articleCount} delay={0} duration={ANIMATION_DURATION} /> : "..."}
+        {/* {articleCount ? <CustomCountUp number={articleCount} delay={0} duration={ANIMATION_DURATION} /> : "..."} */}
       </button>
     </Link>
   )

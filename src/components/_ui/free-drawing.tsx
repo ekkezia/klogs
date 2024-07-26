@@ -3,6 +3,9 @@
 import React from "react"
 import { Stage, Layer, Line, Text } from "react-konva"
 import Konva from "konva"
+import { motion } from 'framer-motion'
+import { twMerge } from 'tailwind-merge'
+import { HORIZONTAL_BAR_HEIGHT } from '@/styles/shared'
 
 type Tool = "pen" | "eraser"
 
@@ -50,14 +53,13 @@ const FreeDrawing: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <div className={className}>
       <Stage
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={window.innerWidth - 48 * 2}
+        height={window.innerHeight - 48 * 2}
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
         onMouseup={handleMouseUp}
       >
         <Layer>
-          <Text text="Just start drawing" x={5} y={30} />
           {lines.map((line, i) => (
             <Line
               key={i}
@@ -71,16 +73,23 @@ const FreeDrawing: React.FC<{ className?: string }> = ({ className }) => {
           ))}
         </Layer>
       </Stage>
-      <select
-        style={{ position: "absolute", top: "5px", left: "5px" }}
-        value={tool}
-        onChange={(e) => {
-          setTool(e.target.value as Tool)
-        }}
-      >
-        <option value="pen">Pen</option>
-        <option value="eraser">Eraser</option>
-      </select>
+      <motion.div className="absolute top-1/2 border border-primary flex justify-center items-center cursor-pointer"
+              drag
+        dragMomentum={false}
+>
+    <div onClick={() => setTool("pen")} className="hover:bg-secondary w-[48px] h-[48px] flex justify-center items-center border-r border-primary">🖋️</div>
+    <div onClick={() => setTool("eraser")} className="hover:bg-secondary w-[48px] h-[48px] flex justify-center items-center">🗑️</div>
+
+        {/* <select
+          value={tool}
+          onChange={(e) => {
+            setTool(e.target.value as Tool)
+          }}
+        >
+          <option value="pen">Pen</option>
+          <option value="eraser">Eraser</option>
+        </select> */}
+      </motion.div>
     </div>
   )
 }
