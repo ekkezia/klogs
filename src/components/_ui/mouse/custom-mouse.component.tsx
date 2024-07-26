@@ -43,7 +43,7 @@ const CustomMouse: React.FC<ICustomMouseProps> = ({ color }) => {
           width: '0.5px',
           height: '100vh',
           left: mouse.x,
-          backgroundColor: color || 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: color || 'var(--secondary-default)',
         }}
       />
       {/* Horizontal line */}
@@ -53,7 +53,7 @@ const CustomMouse: React.FC<ICustomMouseProps> = ({ color }) => {
           width: '100vw',
           height: '0.5px',
           top: mouse.y,
-          backgroundColor: color || 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: color || 'var(--secondary-default)',
         }}
       />
     </div>

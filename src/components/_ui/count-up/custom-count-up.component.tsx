@@ -26,7 +26,7 @@ const CustomCountUp: React.FC<ICustomCountUpProps> = ({
         useEasing={false}
         onEnd={onEnd}
         redraw={redraw}
-        className="h1 text-primary"
+        className="body1 text-primary"
       />
   );
 };

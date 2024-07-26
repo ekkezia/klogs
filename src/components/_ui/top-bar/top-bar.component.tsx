@@ -15,6 +15,7 @@ import {
   OUTER_BAR_WIDTH_LG,
   Z_INDEX_MODAL,
 } from "@/styles/shared"
+import LogsButton from "../logs-button"
 
 interface ITopbarProps {
   isOpen: boolean
@@ -27,35 +28,16 @@ const TopBar: React.FC<ITopbarProps> = ({ isOpen, toggle }) => {
 
   return (
     <div
-      className="fixed top-0 left-0 z-[Z_INDEX_FIXED_BARS] w-screen border-b border-primary bg-white"
+      className="fixed left-0 top-0 z-[11] flex w-full border-b border-primary"
       style={{ height: HORIZONTAL_BAR_HEIGHT }}
     >
-      <div className="flex w-full" style={{ maxWidth: MAXWIDTH, height: HORIZONTAL_BAR_HEIGHT }}>
-        <div className={`h-full border-r border-primary`} style={{ width: OUTER_BAR_WIDTH }} />
+      <div className={`h-full border-r border-primary`} style={{ width: OUTER_BAR_WIDTH }} />
 
-        <div
-          className={`h-full border-r border-primary`}
-          style={{
-            width: INNER_BAR_WIDTH,
-          }}
-        >
-          <Link href="/">
-            LOGO
-            {/* <img src="/logo/logo.png" alt=" Logo" width="100%" height={`calc(${HORIZONTAL_BAR_HEIGHT} - 1px)`} /> */}
-          </Link>
-        </div>
-
-        <div className="flex-1"></div>
-
-        <div className={`h-full border-l border-primary`} style={{ width: INNER_BAR_WIDTH }}>
-          THEME
-        </div>
-
-        <div
-          className={`h-full border-l border-primary ${OUTER_BAR_WIDTH} hidden lg:block`}
-          style={{ width: OUTER_BAR_WIDTH }}
-        />
+      <div className="flex-1 bg-white">
+        <LogsButton />
       </div>
+
+      <div className={`h-full border-l border-primary`} style={{ width: OUTER_BAR_WIDTH }} />
     </div>
   )
 }

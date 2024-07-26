@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
+const plugin = require("tailwindcss/plugin")
 
 const config: Config = {
   content: [
@@ -8,60 +9,106 @@ const config: Config = {
   ],
   theme: {
     borderWidth: {
-      DEFAULT: '0.2px',
+      DEFAULT: "0.2px",
     },
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#2B648D', // corporate blue
-          lighter: '#3CADFF',
+          DEFAULT: "#CD2DD8", // corporate blue
+          lighter: "#3CADFF",
         },
         secondary: {
-          DEFAULT: '#EBC67E', // cream yellow
+          DEFAULT: "#000000", // cream yellow
         },
         tertiary: {
-          DEFAULT: '#D9D9D9', // for Background Lines
+          DEFAULT: "#D9D9D9", // for Background Lines
         },
         error: {
-          DEFAULT: '#D82D38',
+          DEFAULT: "#D82D38",
         },
         success: {
-          DEFAULT: '#19867F',
-        },
-        brand: {
-          blue: '#2B648D',
-          green: '#19867F', // Celadon green
-          turquoise: '#10BEB3',
-          orange: '#FE600E', // Calamansi orange
-          fuschia: '#CD2DD8',
+          DEFAULT: "#19867F",
         },
         neutral: {
-          black: '#404040',
-          white: '#FAFAFA',
-          grey: '#7A7A7A',
+          black: "#404040",
+          white: "#FAFAFA",
+          grey: "#7A7A7A",
         },
         background: {
-          primary: '#fafafa', // Off White
-          secondary: '#f0f0f0',
-          contrast: '#404040', // Off Blacks
-          pure: '#ffffff', // Pure White
-          transparent: 'rgba(250, 250, 250, 0.9)',
+          primary: "#fafafa", // Off White
+          secondary: "#f0f0f0",
+          contrast: "#404040", // Off Blacks
+          pure: "#ffffff", // Pure White
+          transparent: "rgba(250, 250, 250, 0.9)",
         },
         text: {
-          primary: '#404040', // Off Black
-          secondary: '#7A7A7A', // Sonic Silver
-          contrast: '#fafafa', // White
-          lighter: '#D9D9D9',
-          link: '#3CADFF',
+          primary: "#404040", // Off Black
+          secondary: "#7A7A7A", // Sonic Silver
+          contrast: "#fafafa", // White
+          lighter: "#D9D9D9",
+          link: "#3CADFF",
         },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  plugins: [],
-};
-export default config;
+  plugins: [
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".body1": {
+          fontFamily: "var(--font-monoton)",
+          fontSize: '32px',
+          fontWeight: '400',
+          lineHeight: '48px'
+        },
+
+        ".body2": {
+          fontFamily: "var(--font-monoton)",
+          fontSize: '24px',
+          fontWeight: '400',
+          lineHeight: '36px'
+        },
+
+        ".body3": {
+          fontFamily: "var(--font-monoton)",
+          fontSize: '16px',
+          fontWeight: '400',
+        },
+
+        ".body4": {
+          fontFamily: "var(--font-monoton)",
+          fontSize: '12px',
+          fontWeight: '400',
+        },
+
+        ".h1": {
+          fontFamily: "var(--font-bricolage-grotesque)",
+          fontSize: '12rem',
+          fontWeight: '700',
+        },
+
+        ".h2": {
+          fontFamily: "var(--font-bricolage-grotesque)",
+          fontSize: '36px',
+          fontWeight: '700',
+        },
+
+        ".h3": {
+          fontFamily: "var(--font-bricolage-grotesque)",
+          fontSize: '28px',
+          fontWeight: '700',
+        },
+
+        ".h4": {
+          fontFamily: "var(--font-bricolage-grotesque)",
+          fontSize: '20px',
+          fontWeight: '700',
+        },
+      })
+    }),
+  ],
+}
+export default config

@@ -1,39 +1,25 @@
-import { css } from '@emotion/react';
-import React from 'react';
-import {
-  HORIZONTAL_BAR_HEIGHT,
-  INNER_BAR_WIDTH,
-  INNER_BAR_WIDTH_LG,
-  INNER_BAR_WIDTH_SM,
-  Z_INDEX_FIXED_BARS,
-} from '@/styles/shared';
-import { twMerge } from 'tailwind-merge';
+import React from "react"
+import { HORIZONTAL_BAR_HEIGHT, INNER_BAR_WIDTH } from "@/styles/shared"
+import { twMerge } from "tailwind-merge"
 
 interface IContentBoxProps {
-  padded?: boolean;
-  verticalContent?: React.ReactNode;
-  mainContent: React.ReactNode;
-  noBorderBottom?: boolean;
-  sticky?: boolean;
+  padded?: boolean
+  verticalContent?: React.ReactNode
+  mainContent: React.ReactNode
+  noBorderBottom?: boolean
+  sticky?: boolean
 }
 
-const ContentBox: React.FC<IContentBoxProps> = ({
-  padded,
-  verticalContent,
-  mainContent,
-  noBorderBottom,
-  sticky,
-}) => {
+const ContentBox: React.FC<IContentBoxProps> = ({ padded, verticalContent, mainContent, noBorderBottom, sticky }) => {
   return (
-    <div className={
-      twMerge(
+    <div
+      className={twMerge(
         sticky ? "sticky z-10" : "relative",
-        noBorderBottom ? '' : 'border-b border-b-primary',
-        'w-full h-fit flex'
-      )
-    }
-    style={{
-        top: sticky ? HORIZONTAL_BAR_HEIGHT : ''
+        noBorderBottom ? "" : "border-b border-b-primary",
+        "flex h-fit w-full"
+      )}
+      style={{
+        top: sticky ? HORIZONTAL_BAR_HEIGHT : "",
       }}
     >
       <div
@@ -43,21 +29,19 @@ const ContentBox: React.FC<IContentBoxProps> = ({
           minWidth: INNER_BAR_WIDTH,
         }}
       >
-        {verticalContent ?? ''}
+        {verticalContent ?? ""}
       </div>
 
       <div
-        className={twMerge(
-          padded ? 'p-2' : 'p-0'
-        )}
+        className={twMerge(padded ? "p-2" : "p-0")}
         style={{
-          width: `calc(100% - ${INNER_BAR_WIDTH})`
+          width: `calc(100% - ${INNER_BAR_WIDTH})`,
         }}
       >
         {mainContent}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ContentBox;
+export default ContentBox

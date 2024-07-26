@@ -10,7 +10,7 @@ import Socials from "../organism/socials/socials.component"
 import useBoolean from "../../hooks/useBoolean"
 import { useRouter } from "next/navigation"
 import CustomMouse from "./mouse/custom-mouse.component"
-import { INNER_BAR_WIDTH, MAXWIDTH, OUTER_BAR_WIDTH } from "@/styles/shared"
+import { HORIZONTAL_BAR_HEIGHT, INNER_BAR_WIDTH, MAXWIDTH, OUTER_BAR_WIDTH } from "@/styles/shared"
 
 interface ILayoutProps {
   children?: React.ReactNode
@@ -40,8 +40,9 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
       <div className="relative flex w-screen">
         <div
-          className={`min-h-screen border-r border-primary`}
+          className={`absolute left-0 z-10 min-h-screen border-r border-primary bg-white`}
           style={{
+            top: HORIZONTAL_BAR_HEIGHT,
             width: OUTER_BAR_WIDTH,
           }}
         >
@@ -49,39 +50,22 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         </div>
 
         <div
-          className={`absolute top-0 min-h-screen border-r border-primary`}
+          className="absolute min-h-screen w-full"
           style={{
+            top: HORIZONTAL_BAR_HEIGHT,
             left: OUTER_BAR_WIDTH,
-            width: INNER_BAR_WIDTH,
-            minWidth: INNER_BAR_WIDTH,
-            maxWidth: INNER_BAR_WIDTH,
-          }}
-        />
-
-        <div
-          className="absolute border-r border-primary w-full min-h-screen"
-          style={{
-            left: `calc(${OUTER_BAR_WIDTH} + ${INNER_BAR_WIDTH})`,
-            width: `calc(100% - (${OUTER_BAR_WIDTH} * 2) - (${INNER_BAR_WIDTH} * 2))`,
+            width: `calc(100% - (${OUTER_BAR_WIDTH} * 2))`,
           }}
         >
           {children}
         </div>
 
         <div
-          className="min-h-screen"
+          className={`absolute right-0 z-10 min-h-screen border-l border-primary bg-white`}
           style={{
-            right: OUTER_BAR_WIDTH,
-            width: INNER_BAR_WIDTH,
+            top: HORIZONTAL_BAR_HEIGHT,
+            width: OUTER_BAR_WIDTH,
           }}
-        >
-          {/* Only display navbar INSIDE INNER RIGHT BAR when it is NOT xs screen */}
-          {<NavBar navItems={ROUTES} isOpen={isOpen} />}
-        </div>
-
-        <div
-          className={`min-h-screen border-l border-primary`}
-          style={{ right: 0, width: OUTER_BAR_WIDTH }}
         />
       </div>
 

@@ -5,18 +5,13 @@ import { OUTER_BAR_WIDTH } from '@/styles/shared';
 const SOCIAL_LINKS = Object.freeze([
   {
     name: 'email',
-    url: 'mailto:info@parallelchain.io',
+    url: 'mailto:e.kezia@gmail.com',
     icon: 'email.svg',
   },
   {
-    name: 'twitter',
-    url: 'https://twitter.com/ParallelChainLB',
-    icon: 'twitter.svg',
-  },
-  {
-    name: 'telegram',
-    url: 'https://t.me/parallelchainofficial',
-    icon: 'telegram.svg',
+    name: 'instagram',
+    url: 'https://instagram.com/ekezia',
+    icon: 'instagram.svg',
   },
   {
     name: 'linkedin',
@@ -24,15 +19,16 @@ const SOCIAL_LINKS = Object.freeze([
     icon: 'linkedin.svg',
   },
   {
-    name: 'discord',
-    url: 'https://discord.com/invite/parallelchainofficial',
-    icon: 'discord.svg',
-  },
-  {
     name: 'github',
     url: 'https://github.com/parallelchain-io',
     icon: 'github.svg',
   },
+  {
+    name: 'portfolio',
+    url: 'https://e-kezia.com',
+    icon: 'portfolio.svg',
+  },
+
 ]);
 
 const Socials: React.FC = () => {

@@ -1,9 +1,11 @@
 "use client"
 
+import Clock from "@/components/_ui/clock"
 import CustomCountUp from "@/components/_ui/count-up/custom-count-up.component"
+import FreeDrawing from "@/components/_ui/free-drawing"
 import useBoolean from "@/hooks/useBoolean"
 import useScrollPosition from "@/hooks/useScrollPosition"
-import getCurrentDate from "@/utils/dates"
+import getCurrentDate, { formatDate } from "@/utils/dates"
 import { RefObject, useEffect, useRef } from "react"
 
 export const ANIMATION_DURATION = 1
@@ -33,9 +35,9 @@ const LandingPageHero: React.FC = () => {
   useEffect(() => {
     if (textContainerRef.current) {
       if (scrollPosition > 0) {
-        textContainerRef.current.style.zIndex = '0'
+        textContainerRef.current.style.zIndex = "0"
       } else {
-        textContainerRef.current.style.zIndex = '11'
+        textContainerRef.current.style.zIndex = "11"
       }
     }
   }, [scrollPosition])
@@ -43,22 +45,19 @@ const LandingPageHero: React.FC = () => {
   return (
     <main>
       <div
-        className="absolute flex h-screen w-full flex-col items-center justify-center"
+        className="pointer-events-none absolute flex h-screen w-full flex-col items-center justify-center"
         ref={textContainerRef}
         style={{
           zIndex: 11,
         }}
       >
-        <h1 className="h1 mr-2 text-center">Kezia's Diary 🐤</h1>
+        <Clock />
 
-        <div className="flex flex-wrap items-center" ref={countUpRef}>
-          <p className="body1">No. of Entries:&nbsp;</p>
-
-          <CustomCountUp number={10} delay={0} duration={ANIMATION_DURATION} onEnd={handleCountUpIsFinished} />
-
-          <p className="body1">&nbsp;as of {getCurrentDate()}</p>
-        </div>
+        <h2 className="h2 text-center">Kezia</h2>
+        
+        <p className="body1">as of {formatDate(getCurrentDate())}</p>
       </div>
+      <FreeDrawing className="absolute" />
     </main>
   )
 }
