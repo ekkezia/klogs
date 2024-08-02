@@ -89,3 +89,21 @@ body {
     text-wrap: balance;
   }
 }
+
+.custom-resize-handle {
+  position: relative;
+  cursor: ew-resize;
+}
+
+.custom-resize-handle::after {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  width: 20px; 
+  height: 20px;
+  z-index: 10;
+  background: var(--primary-default); /* Adjust color */
+  transform: translate(-50%, -50%);
+}
+

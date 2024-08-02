@@ -5,25 +5,27 @@ import TopBar from "./top-bar/top-bar.component"
 import BottomBar from "./bottom-bar/bottom-bar.component"
 import Socials from "../organism/socials/socials.component"
 import CustomMouse from "./mouse/custom-mouse.component"
-import { HORIZONTAL_BAR_HEIGHT, INNER_BAR_WIDTH, MAXWIDTH, OUTER_BAR_WIDTH } from "@/styles/shared"
-import PageTransition from './page-transition'
-import FreeDrawing from './free-drawing'
-import Menu from '../organism/menu.component'
-import ResizablePanel from './resizable-panel'
+import { HORIZONTAL_BAR_HEIGHT, MAX_CONTENT_WIDTH, OUTER_BAR_WIDTH } from "@/styles/shared"
+import PageTransition from "./page-transition"
+import FreeDrawing from "./free-drawing"
+import Menu from "../organism/menu.component"
+import ResizablePanel from "./resizable-panel"
+import { usePathname } from "next/navigation"
 
 interface ILayoutProps {
   children?: React.ReactNode
 }
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
+  const pathname = usePathname()
 
   return (
-    <div className="flex min-h-screen w-screen justify-center bg-white">
+    <div className="flex h-full min-h-screen w-screen justify-center bg-white">
       <TopBar />
 
-      <div className="relative flex w-screen">
+      <div className="relative flex h-full w-screen">
         <div
-          className={`absolute left-0 z-10 min-h-screen h-full border-r border-primary bg-white`}
+          className={`fixed left-0 z-10 h-fit min-h-screen border-r border-primary bg-white`}
           style={{
             top: HORIZONTAL_BAR_HEIGHT,
             width: OUTER_BAR_WIDTH,
@@ -33,7 +35,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         </div>
 
         <div
-          className="absolute min-h-screen max-w-screen h-full"
+          className="max-w-screen absolute h-full min-h-screen"
           style={{
             paddingTop: HORIZONTAL_BAR_HEIGHT,
             paddingBottom: HORIZONTAL_BAR_HEIGHT,
@@ -41,29 +43,35 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
             width: `calc(100% - (${OUTER_BAR_WIDTH} * 2))`,
           }}
         >
+          <ResizablePanel
+            className="pointer-events-none fixed top-0 h-screen"
+            style={{
+              width: MAX_CONTENT_WIDTH,
+              zIndex: 1,
+            }}
+          />
 
-                                        <ResizablePanel
-          className="absolute top-0 pointer-events-auto"
-            />
+          <FreeDrawing
+            className="fixed top-0 z-0 h-fit w-full"
+            showToolbar={pathname === "/"}
+            style={{
+              width: MAX_CONTENT_WIDTH,
+              zIndex: 0,
+            }}
+          />
 
-          <FreeDrawing className="absolute h-fit w-full z-0" />
-
-          <PageTransition className="relative z-[2]">
-            {children}
-          </PageTransition>
-
+          <PageTransition className="relative z-[2]">{children}</PageTransition>
         </div>
 
         <div
-          className={`absolute right-0 z-10 min-h-screen h-full border-l border-primary bg-white`}
+          className={`fixed right-0 z-10 h-fit min-h-screen border-l border-primary bg-white`}
           style={{
             top: HORIZONTAL_BAR_HEIGHT,
             width: OUTER_BAR_WIDTH,
           }}
         >
-                  <Menu />
-
-          </div>
+          <Menu />
+        </div>
       </div>
 
       <BottomBar />

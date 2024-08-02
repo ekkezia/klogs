@@ -7,7 +7,9 @@ export default async function fetchAllArticles() {
     headers: {
       "Content-Type": "application/json",
     },
-  })
+    next: { revalidate: 10 },
+  },
+)
 
   if (!res.ok) {
     throw new Error("Failed to fetch articles")

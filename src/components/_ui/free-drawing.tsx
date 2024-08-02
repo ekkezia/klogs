@@ -3,9 +3,9 @@
 import React from "react"
 import { Stage, Layer, Line, Text } from "react-konva"
 import Konva from "konva"
-import { motion } from 'framer-motion'
-import { twMerge } from 'tailwind-merge'
-import { HORIZONTAL_BAR_HEIGHT } from '@/styles/shared'
+import { motion } from "framer-motion"
+import { twMerge } from "tailwind-merge"
+import { HORIZONTAL_BAR_HEIGHT } from "@/styles/shared"
 
 type Tool = "pen" | "eraser"
 
@@ -14,7 +14,11 @@ interface LineProps {
   points: number[]
 }
 
-const FreeDrawing: React.FC<{ className?: string }> = ({ className }) => {
+const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?: any }> = ({
+  className,
+  showToolbar,
+  style,
+}) => {
   const [tool, setTool] = React.useState<Tool>("pen")
   const [lines, setLines] = React.useState<LineProps[]>([])
 
@@ -51,7 +55,7 @@ const FreeDrawing: React.FC<{ className?: string }> = ({ className }) => {
   }
 
   return (
-    <div className={className}>
+    <div className={className} style={style}>
       <Stage
         width={window.innerWidth - 48 * 2}
         height={window.innerHeight - 48 * 2}
@@ -73,23 +77,26 @@ const FreeDrawing: React.FC<{ className?: string }> = ({ className }) => {
           ))}
         </Layer>
       </Stage>
-      <motion.div className="absolute top-1/2 border border-primary flex justify-center items-center cursor-pointer"
-              drag
-        dragMomentum={false}
->
-    <div onClick={() => setTool("pen")} className="hover:bg-secondary w-[48px] h-[48px] flex justify-center items-center border-r border-primary">🖋️</div>
-    <div onClick={() => setTool("eraser")} className="hover:bg-secondary w-[48px] h-[48px] flex justify-center items-center">🗑️</div>
-
-        {/* <select
-          value={tool}
-          onChange={(e) => {
-            setTool(e.target.value as Tool)
-          }}
+      {showToolbar && (
+        <motion.div
+          className="group absolute top-1/2 flex cursor-pointer items-center justify-center border border-primary"
+          drag
+          dragMomentum={false}
         >
-          <option value="pen">Pen</option>
-          <option value="eraser">Eraser</option>
-        </select> */}
-      </motion.div>
+          <div
+            onClick={() => setTool("pen")}
+            className="flex h-[48px] w-[48px] items-center justify-center border-r border-primary bg-secondary hover:bg-secondary group-hover:bg-transparent"
+          >
+            {tool === "pen" ? "🖋️" : "🗑️"}{" "}
+          </div>
+          <div
+            onClick={() => setTool("eraser")}
+            className="hidden h-[48px] w-[48px] items-center justify-center hover:bg-secondary group-hover:flex"
+          >
+            {tool === "pen" ? "🗑️" : "🖋️"}{" "}
+          </div>
+        </motion.div>
+      )}{" "}
     </div>
   )
 }

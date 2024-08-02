@@ -4,14 +4,14 @@ import { TArticleImage } from "@/types/article-types"
 import React, { createContext, useState, ReactNode, useContext, SetStateAction, Dispatch } from "react"
 
 interface LogsImageContextType {
-  imageSrc: TArticleImage | undefined
-  setImageSrc: Dispatch<SetStateAction<TArticleImage | undefined>>
+  imageSrc: TArticleImage | null | undefined
+  setImageSrc: Dispatch<SetStateAction<TArticleImage | null | undefined>>
 }
 
-const LogsImageContext = createContext<LogsImageContextType | undefined>(undefined)
+const LogsImageContext = createContext<LogsImageContextType | null | undefined>(null)
 
 export const LogsImageContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [imageSrc, setImageSrc] = useState<TArticleImage | undefined>()
+  const [imageSrc, setImageSrc] = useState<TArticleImage | null | undefined>()
 
   return <LogsImageContext.Provider value={{ imageSrc, setImageSrc }}>{children}</LogsImageContext.Provider>
 }

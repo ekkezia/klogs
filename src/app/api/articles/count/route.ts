@@ -1,5 +1,5 @@
 import { sanityFetch } from '@/sanity/client';
-import { ArticlesCountSchema, COUNT_QUERY } from '@/types/article-types';
+import { ArticlesCountSchema, sanityQueryConfig } from '@/types/article-types';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -7,7 +7,7 @@ import { z } from 'zod';
 export async function GET() {
   try {
     const res = await sanityFetch({
-      query: COUNT_QUERY,
+      query: sanityQueryConfig("count"),
     });
     const validated = ArticlesCountSchema.parse(res)
 

@@ -1,16 +1,19 @@
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 
-const ResizablePanel: React.FC<{ className?: string, leftPanel?: React.ReactNode, rightPanel?: React.ReactNode }> = ({ className, leftPanel, rightPanel }) => {
+const ResizablePanel: React.FC<{
+  className?: string
+  leftPanel?: React.ReactNode
+  rightPanel?: React.ReactNode
+  style?: any
+}> = ({ className, leftPanel, rightPanel, style }) => {
   return (
-    <PanelGroup autoSaveId="example" direction="horizontal" className={className}>
-  <Panel defaultSizePercentage={100} className="border-r border-primary bg-transparent z-0 relative">
-    {leftPanel}left
-  </Panel>
-  <PanelResizeHandle />
-  <Panel className="bg-white z-[1] relative">
-    {rightPanel}right
-  </Panel>
-</PanelGroup>
+    <PanelGroup autoSaveId="example" direction="horizontal" className={className} style={style}>
+      <Panel defaultSizePercentage={100} className="relative z-0 border-r border-primary bg-transparent">
+        {leftPanel}left
+      </Panel>
+      <PanelResizeHandle className="custom-resize-handle" />
+      <Panel className="relative z-[1] bg-white">{rightPanel}right</Panel>
+    </PanelGroup>
   )
 }
 
