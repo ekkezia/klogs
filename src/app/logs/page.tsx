@@ -1,28 +1,25 @@
 import React from "react"
-import fetchAllArticles from "@/lib/data/fetch-all-articles"
 import { LogsImageContextProvider } from "@/contexts/logs-image-context"
 import LogsImage from "@/components/_ui/logs-image"
 import LogsTitle from "@/components/_ui/logs-title"
 import LinesBackground from "@/components/_ui/lines-background"
-
-export const NEWS_PER_PAGE = 6
-export const DEFAULT_PAGE = 1
+import fetchAllLogs from "@/lib/data/fetch-all-logs"
 
 const LogsPage: React.FC = async () => {
-  const articles = await fetchAllArticles()
+  const articles = await fetchAllLogs()
 
   return (
     <LogsImageContextProvider>
       <div className="relative">
-        <LinesBackground height={48.5} />
+        <LinesBackground className="h-line1 sm:h-line1-sm" />
 
         <div className="absolute w-full">
           {articles.map((article, idx) => {
-            return <LogsTitle article={article} index={idx} key={idx} />
+            return <LogsTitle log={article} index={idx} key={idx} />
           })}
         </div>
         {/* Image */}
-        <LogsImage className="fixed right-[10vw] top-1/2" />
+        <LogsImage className="fixed left-1/4 sm:left-1/2 top-1/4" />
       </div>
     </LogsImageContextProvider>
   )

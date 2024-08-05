@@ -2,20 +2,20 @@ import React from "react"
 import { PortableText } from "next-sanity"
 
 export type TArticleBlock = {
-  _key: string;
-  _type: string;
+  _key: string
+  _type: string
   children: {
-    _key: string;
-    _type: string;
-    marks: string[];
-    text: string;
-  }[];
+    _key: string
+    _type: string
+    marks: string[]
+    text: string
+  }[]
   markDefs: {
-    _key: string;
-    _type: string;
-  }[];
-  style: string;
-}[];
+    _key: string
+    _type: string
+  }[]
+  style: string
+}[]
 
 const LogsBlock: React.FC<{
   title: string
@@ -23,10 +23,8 @@ const LogsBlock: React.FC<{
 }> = ({ title, blocks }) => {
   return (
     <>
-      <div className="body2 border-b border-primary px-4 text-primary" style={{ height: 36 }}>
-        {title}
-      </div>
-      <div className="body2 border-b border-primary px-4">
+      <div className="h-line2 sm:h-line2-sm body2 px-4 text-primary">{title}</div>
+      <div className="body2 px-4">
         <PortableText value={blocks} />
       </div>
     </>

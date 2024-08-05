@@ -11,11 +11,9 @@ export async function GET(request: Request, { params }: { params: { slug: string
       query: sanityQueryConfig("fetchBy", 'slug', slug),
     })
 
-    const validated = ArticleSchema.parse(res)
+    // const validated = LogSchema.parse(res)
 
-    console.log('featured in validated', validated)
-
-    return NextResponse.json(validated)
+    return NextResponse.json(res)
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 })

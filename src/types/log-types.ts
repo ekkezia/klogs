@@ -10,7 +10,7 @@ const featuredInSchema = z.object({
   _type: z.string(),
 })
 
-const ArticleBlockSchema = z.object({
+const LogBlockSchema = z.object({
   _key: z.string(),
   markDefs: z.array(z.any()),
   children: z.array(
@@ -25,40 +25,40 @@ const ArticleBlockSchema = z.object({
   style: z.string(),
 })
 
-const ArticleImageSchema = z.object({
+const LogImageSchema = z.object({
   asset: z.object({
     _id: z.string().nullable(),
     url: z.string().nullable(),
   }),
 })
 
-export const ArticleSchema = z.object({
+export const LogSchema = z.object({
   _id: z.string(),
   date: z.string(),
   title: z.string(),
-  image: ArticleImageSchema,
+  image: LogImageSchema,
   projectUrl: z.string(),
   githubUrl: z.string().nullable(),
-  overview: z.array(ArticleBlockSchema),
+  overview: z.array(LogBlockSchema),
   techStacks: z.array(TechStackSchema),
   featuredIns: z.array(featuredInSchema),
-  description: z.array(ArticleBlockSchema),
-  notes: z.array(ArticleBlockSchema),
+  description: z.array(LogBlockSchema),
+  notes: z.array(LogBlockSchema),
   slug: z.string(),
 })
 
-export type TArticleImage = z.infer<typeof ArticleImageSchema>
-export type TArticleBlock = z.infer<typeof ArticleBlockSchema>
+export type TLogImage = z.infer<typeof LogImageSchema>
+export type TLogBlock = z.infer<typeof LogBlockSchema>
 
-export type TArticle = z.infer<typeof ArticleSchema>
+export type TLog = z.infer<typeof LogSchema>
 
-export const ArticlesSchema = z.array(ArticleSchema)
+export const LogsSchema = z.array(LogSchema)
 
-export type TArticles = z.infer<typeof ArticlesSchema>
+export type TLogs = z.infer<typeof LogsSchema>
 
-export const ArticlesCountSchema = z.number()
+export const LogsCountSchema = z.number()
 
-export type TArticlesCount = z.infer<typeof ArticlesCountSchema>
+export type TLogsCount = z.infer<typeof LogsCountSchema>
 
 export const sanityQueryConfig = (
   type: "count" | "fetchAll" | "fetchBy",
@@ -108,4 +108,4 @@ export const sanityQueryConfig = (
   return query
 }
 
-export const COUNT_QUERY = `count(*[_type == "article"])`
+export const COUNT_QUERY = `count(*[_type == "Log"])`

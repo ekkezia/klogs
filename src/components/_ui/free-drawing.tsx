@@ -1,11 +1,10 @@
 "use client"
 
 import React from "react"
-import { Stage, Layer, Line, Text } from "react-konva"
+import { Stage, Layer, Line } from "react-konva"
 import Konva from "konva"
 import { motion } from "framer-motion"
-import { twMerge } from "tailwind-merge"
-import { HORIZONTAL_BAR_HEIGHT } from "@/styles/shared"
+import { useThemeContext } from "@/contexts/theme-context"
 
 type Tool = "pen" | "eraser"
 
@@ -19,6 +18,8 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
   showToolbar,
   style,
 }) => {
+  const { primaryColor } = useThemeContext()
+
   const [tool, setTool] = React.useState<Tool>("pen")
   const [lines, setLines] = React.useState<LineProps[]>([])
 
@@ -68,7 +69,7 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
             <Line
               key={i}
               points={line.points}
-              stroke="#df4b26"
+              stroke={primaryColor}
               strokeWidth={5}
               tension={0.5}
               lineCap="round"
@@ -85,7 +86,7 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
         >
           <div
             onClick={() => setTool("pen")}
-            className="flex h-[48px] w-[48px] items-center justify-center border-r border-primary bg-secondary hover:bg-secondary group-hover:bg-transparent"
+            className="flex h-[48px] w-[48px] items-center justify-center border-r border-primary bg-primary hover:bg-secondary group-hover:bg-transparent"
           >
             {tool === "pen" ? "🖋️" : "🗑️"}{" "}
           </div>

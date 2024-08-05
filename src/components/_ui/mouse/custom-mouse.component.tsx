@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Z_INDEX_MODAL } from '../Layout';
 
 interface ICustomMouseProps {
   color?: string;

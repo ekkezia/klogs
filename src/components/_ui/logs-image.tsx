@@ -9,7 +9,7 @@ import { motion } from "framer-motion"
 const LogsImage: React.FC<{ className?: string }> = ({ className }) => {
   const { imageSrc } = useLogsImageContext()
 
-  if (!imageSrc?.asset._ref) {
+  if (!imageSrc?.asset.url) {
     return <></>
   }
 
@@ -17,9 +17,12 @@ const LogsImage: React.FC<{ className?: string }> = ({ className }) => {
     <motion.div
       drag
       dragMomentum={false}
-      className={twMerge("h-[400px] w-[300px] border-[16px] border-primary", className)}
+      className={twMerge(
+        "pointer-events-none h-fit max-h-[400px] w-fit max-w-[200px] border-[8px] border-primary sm:max-h-[600px] sm:max-w-[300px]",
+        className
+      )}
     >
-      {imageSrc ? <img src={sanityImage(imageSrc)} alt={imageSrc.asset._ref ?? "image"} /> : <div />}
+      {imageSrc ? <img src={sanityImage(imageSrc)} alt={imageSrc.asset.url ?? "image"} /> : <div />}
     </motion.div>
   )
 }

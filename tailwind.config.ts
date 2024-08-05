@@ -12,41 +12,42 @@ const config: Config = {
       DEFAULT: "0.2px",
     },
     extend: {
+      padding: {
+        line2: "27px",
+        "line2-sm": "36px",
+        line1: "36px",
+        "line1-sm": "48px",
+      },
+      height: {
+        line2: "27px",
+        "line2-sm": "36px",
+        line1: "36px",
+        "line1-sm": "48px",
+        "iframe": `calc(27 * 4 * 4)`,
+        "iframe-sm": `calc(36 * 4 * 4)`,
+      },
+      width: {
+        line2: "27px",
+        "line2-sm": "36px",
+        line1: "36px",
+        "line1-sm": "48px",
+        "content": `calc(100% - (36px * 2))`,
+        "content-sm": `calc(100% - (48px * 2))`,
+        "iframe": `calc(27 * 6 * 4)`,
+        "iframe-sm": `calc(36 * 6 * 4)`,
+      },
       colors: {
         primary: {
-          DEFAULT: "#CD2DD8", // corporate blue
-          lighter: "#3CADFF",
+          DEFAULT: "var(--primary-default)", // corporate blue
         },
         secondary: {
-          DEFAULT: "#000000", // cream yellow
+          DEFAULT: "var(--secondary-default)", // cream yellow
         },
         tertiary: {
-          DEFAULT: "#D9D9D9", // for Background Lines
-        },
-        error: {
-          DEFAULT: "#D82D38",
-        },
-        success: {
-          DEFAULT: "#19867F",
-        },
-        neutral: {
-          black: "#404040",
-          white: "#FAFAFA",
-          grey: "#7A7A7A",
-        },
-        background: {
-          primary: "#fafafa", // Off White
-          secondary: "#f0f0f0",
-          contrast: "#404040", // Off Blacks
-          pure: "#ffffff", // Pure White
-          transparent: "rgba(250, 250, 250, 0.9)",
+          DEFAULT: "var(--tertiary-default)", // cream yellow
         },
         text: {
-          primary: "#404040", // Off Black
-          secondary: "#7A7A7A", // Sonic Silver
-          contrast: "#fafafa", // White
-          lighter: "#D9D9D9",
-          link: "#3CADFF",
+          primary: "var(--text-primary)", // Off Black
         },
       },
       backgroundImage: {
@@ -60,53 +61,71 @@ const config: Config = {
       addComponents({
         ".body1": {
           fontFamily: "var(--font-monoton)",
-          fontSize: '32px',
-          fontWeight: '400',
-          lineHeight: '48px'
+          fontSize: "32px",
+          fontWeight: "400",
+          lineHeight: "48px",
+          color: "var(--text-primary)",
+          "@media (max-width: 640px)": {
+            fontSize: "24px",
+            lineHeight: "36px",
+          },
         },
 
         ".body2": {
           fontFamily: "var(--font-monoton)",
-          fontSize: '24px',
-          fontWeight: '400',
-          lineHeight: '36px',
+          fontSize: "24px",
+          fontWeight: "400",
+          lineHeight: "36px", // must be the same as notes' line height
+          color: "var(--text-primary)",
+          "@media (max-width: 640px)": {
+            fontSize: "18px",
+            lineHeight: "27px",
+          },
         },
 
         ".body3": {
           fontFamily: "var(--font-monoton)",
-          fontSize: '16px',
-          fontWeight: '400',
+          fontSize: "16px",
+          fontWeight: "400",
+          color: "var(--text-primary)",
+          "@media (max-width: 640px)": {
+            fontSize: "14px",
+          },
         },
 
         ".body4": {
           fontFamily: "var(--font-monoton)",
-          fontSize: '12px',
-          fontWeight: '400',
+          fontSize: "12px",
+          fontWeight: "400",
+          color: "var(--text-primary)",
+          "@media (max-width: 640px)": {
+            fontSize: "10px",
+          },
         },
 
         ".h1": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: '12rem',
-          fontWeight: '700',
+          fontSize: "12rem",
+          fontWeight: "700",
         },
 
         ".h2": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: '36px',
-          fontWeight: '700',
+          fontSize: "36px",
+          fontWeight: "700",
         },
 
         ".h3": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: '28px',
-          fontWeight: '700',
+          fontSize: "28px",
+          fontWeight: "700",
         },
 
         ".h4": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: '24px',
-          fontWeight: '700',
-          lineHeight: '36px',
+          fontSize: "24px",
+          fontWeight: "700",
+          lineHeight: "36px",
         },
       })
     }),

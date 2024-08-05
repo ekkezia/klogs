@@ -19,7 +19,8 @@ const Searchbar: React.FC<{ className?: string; placeholder?: string; defaultVal
         type="text"
         id="search"
         name="search"
-        className={"caret-none body1 h-[47px] w-full px-4"}
+        // todo
+        className={"caret-none body1 h-[35.5px] sm:h-[47px] w-full px-4 bg-tertiary"}
         defaultValue={defaultValue}
         placeholder={placeholder}
       />

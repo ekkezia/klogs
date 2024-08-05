@@ -13,18 +13,19 @@ const LogsIframe: React.FC<LogsIframeProps> = ({ url, ...props }) => {
     <motion.div
       drag
       dragMomentum={false}
-      className=""
-      style={{
-        width: 36 * 6 * 4,
-        height: 36 * 4 * 4,
-      }}
+      className="w-iframe sm:w-iframe-sm h-iframe sm:h-iframe-sm"
+      // style={{
+      //   width: 36 * 6 * 1,
+      //   height: 36 * 4 * 1,
+      // }}
     >
       <iframe
         {...props}
-        style={{
-          width: 36 * 6 * 4,
-          height: 36 * 4 * 4,
-        }}
+        className="w-iframe sm:w-iframe-sm h-iframe sm:h-iframe-sm"
+        // style={{
+        //   width: 36 * 6 * 1,
+        //   height: 36 * 4 * 1,
+        // }}
         src={url}
       />
     </motion.div>

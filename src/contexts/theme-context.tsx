@@ -3,16 +3,16 @@
 import React, { createContext, useState, ReactNode, useContext, SetStateAction, Dispatch } from "react"
 
 interface ThemeContextType {
-  theme: boolean
-  setTheme: Dispatch<SetStateAction<boolean>>
+  primaryColor: string
+  setPrimaryColor: Dispatch<SetStateAction<string>>
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<boolean>(false)
+  const [primaryColor, setPrimaryColor] = useState<string>("#CD2DD8")
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value={{ primaryColor, setPrimaryColor }}>{children}</ThemeContext.Provider>
 }
 
 export const useThemeContext = (): ThemeContextType => {
