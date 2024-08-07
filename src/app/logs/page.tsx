@@ -14,7 +14,7 @@ const LogsPage: React.FC = async () => {
         <div className="relative">
           <LinesBackground className="h-line1 sm:h-line1-sm" />
 
-          <div className="absolute w-full">No logs found 😭</div>
+          <div className="body1 absolute h-line1 w-full text-primary sm:h-line1-sm">No logs found 😭</div>
         </div>
       </LogsImageContextProvider>
     )

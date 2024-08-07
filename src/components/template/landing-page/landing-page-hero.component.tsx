@@ -49,9 +49,9 @@ const LandingPageHero: React.FC = () => {
       >
         <Clock />
 
-        <h2 className="h2 text-center">Kezia</h2>
+        <h2 className="h2 text-center text-secondary">Kezia</h2>
         
-        <p className="body1">as of {formatDate(getCurrentDate())}</p>
+        <p className="body1 text-secondary">as of {formatDate(getCurrentDate())}</p>
       </div>
     </main>
   )

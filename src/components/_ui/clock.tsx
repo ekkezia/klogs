@@ -19,7 +19,7 @@ const Clock: React.FC = () => {
     return () => clearInterval(intervalId)
   }, [])
 
-  return <h1 className="h1">{ctime}</h1>
+  return <h1 className="h1 text-secondary">{ctime}</h1>
 }
 
 export default Clock

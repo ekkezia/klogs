@@ -26,7 +26,7 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
     return (
       <div className="relative">
         <LinesBackground className="h-line2 sm:h-line2-sm" />
-        <div className="z-2 pointer-events-auto">No log found 😭</div>
+        <div className="z-2 body2 pointer-events-auto h-line2 text-primary sm:h-line2-sm">No log found 😭</div>
       </div>
     )
   }
