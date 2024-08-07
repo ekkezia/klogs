@@ -7,12 +7,12 @@ interface MouseContextType {
   setShowMouse: Dispatch<SetStateAction<boolean>>
 }
 
-const MouseContext = createContext<MouseContextType | undefined>(undefined)
+const MouseContext = createContext<MouseContextType | null | undefined>(null)
 
 export const MouseContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [showMouse, setShowMouse] = useState<boolean>(false)
 
-  return <MouseContext.Provider value={{ showMouse, setShowMouse}}>{children}</MouseContext.Provider>
+  return <MouseContext.Provider value={{ showMouse, setShowMouse }}>{children}</MouseContext.Provider>
 }
 
 export const useMouseContext = (): MouseContextType => {

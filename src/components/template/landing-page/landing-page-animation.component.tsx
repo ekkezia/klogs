@@ -4,7 +4,6 @@ import React, { RefObject, useEffect, useRef } from 'react';
 import InteractiveCssCubes from '../../_ui/interactive-animation/interactive-css-cubes.component';
 import useScrollPosition from '../../../hooks/useScrollPosition';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
-import { Z_INDEX_ABOVE, Z_INDEX_BASE, Z_INDEX_FIXED_BARS } from '@/styles/shared';
 
 const LandingPageAnimation: React.FC = () => {
   const interactiveCubesContainerRef = useRef() as RefObject<HTMLDivElement>;

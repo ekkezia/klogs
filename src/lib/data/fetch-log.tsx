@@ -10,7 +10,7 @@ export default async function fetchLog(slug: string) {
   })
 
   if (!res.ok) {
-    throw new Error("Failed to fetch articles")
+    throw new Error("❌ lib/data/fetch-log: Failed to fetch logs")
   }
 
   const data: TLog = await res.json()

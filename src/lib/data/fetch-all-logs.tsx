@@ -12,7 +12,7 @@ export default async function fetchAllLogs() {
 )
 
   if (!res.ok) {
-    throw new Error("Failed to fetch articles")
+    throw new Error("❌lib/data/fetch-all-logs: Failed to fetch logs")
   }
 
   const data: TLogs = await res.json()

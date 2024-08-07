@@ -2,12 +2,12 @@ import { z } from "zod"
 
 const TechStackSchema = z.object({
   label: z.string(),
-  _type: z.string(),
+  url: z.string(),
 })
 
 const featuredInSchema = z.object({
   label: z.string(),
-  _type: z.string(),
+  url: z.string(),
 })
 
 const LogBlockSchema = z.object({

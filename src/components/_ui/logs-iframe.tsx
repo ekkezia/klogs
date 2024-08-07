@@ -10,24 +10,8 @@ interface LogsIframeProps extends React.IframeHTMLAttributes<HTMLIFrameElement> 
 const LogsIframe: React.FC<LogsIframeProps> = ({ url, ...props }) => {
   if (!url) return <></>
   return (
-    <motion.div
-      drag
-      dragMomentum={false}
-      className="w-iframe sm:w-iframe-sm h-iframe sm:h-iframe-sm"
-      // style={{
-      //   width: 36 * 6 * 1,
-      //   height: 36 * 4 * 1,
-      // }}
-    >
-      <iframe
-        {...props}
-        className="w-iframe sm:w-iframe-sm h-iframe sm:h-iframe-sm"
-        // style={{
-        //   width: 36 * 6 * 1,
-        //   height: 36 * 4 * 1,
-        // }}
-        src={url}
-      />
+    <motion.div drag dragMomentum={false} className="p-line2 sm:p-line2-sm h-fit w-fit bg-primary cursor-grab">
+      <iframe {...props} className="w-iframe sm:w-iframe-sm h-iframe sm:h-iframe-sm" src={url} />
     </motion.div>
   )
 }

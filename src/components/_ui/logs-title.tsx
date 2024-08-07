@@ -1,12 +1,11 @@
 "use client"
 
 import { useLogsImageContext } from "@/contexts/logs-image-context"
-import { TArticle } from "@/types/article-types"
 import { TLog } from "@/types/log-types"
 import Link from "next/link"
 import React from "react"
 
-const LogsTitle: React.FC<{ log: TArticle; index: number }> = ({ log, index }) => {
+const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   const { setImageSrc } = useLogsImageContext()
 
   const handleMouseEnter = () => {

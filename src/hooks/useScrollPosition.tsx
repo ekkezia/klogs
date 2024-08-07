@@ -1,5 +1,6 @@
-/** eslint-disable-next-line react-hooks/exhaustive-dep */
-import { useEffect, useState, useCallback, RefObject } from 'react';
+'use client'
+
+import { useEffect, useState } from 'react';
 
 export function useScrollPosition() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -23,33 +24,34 @@ export function useScrollPosition() {
 
 export default useScrollPosition;
 
-export function useCustomScrollPosition(
-  axis: string,
-  scrollContainer: RefObject<HTMLDivElement>,
-  document: RefObject<HTMLDivElement>,
-) {
-  // input scroll container parent (the div that has overflow)
-  const [scrollPosition, setScrollPosition] = useState<number | undefined>(0);
-  const [documentLength, setDocumentLength] = useState<number | undefined>(0);
+// export function useCustomScrollPosition(
+//   axis: string,
+//   scrollContainer: RefObject<HTMLDivElement>,
+//   document: RefObject<HTMLDivElement>,
+// ) {
+//   // input scroll container parent (the div that has overflow)
+//   const [scrollPosition, setScrollPosition] = useState<number | undefined>(0);
+//   const [documentLength, setDocumentLength] = useState<number | undefined>(0);
 
-  useEffect(() => {
-    if (document) {
-      setDocumentLength(
-        axis === 'y'
-          ? document?.current?.scrollHeight
-          : document?.current?.scrollWidth,
-      );
-    }
-  }, []);
+//   useEffect(() => {
+//     if (document) {
+//       setDocumentLength(
+//         axis === 'y'
+//           ? document?.current?.scrollHeight
+//           : document?.current?.scrollWidth,
+//       );
+//     }
+//   }, []);
 
-  const onScroll = useCallback((e) => {
-    setScrollPosition(axis === 'y' ? e.target.scrollTop : e.target.scrollLeft);
-  }, []);
+//   const onScroll = useCallback((e: UIEvent<HTMLDivElement>) => {
+//     const target = e.target as HTMLDivElement;
+//     setScrollPosition(axis === 'y' ? target.scrollTop : target.scrollLeft);
+//     }, []);
 
-  useEffect(() => {
-    scrollContainer?.current?.addEventListener('scroll', onScroll);
-    // return () => scrollContainer.current.removeEventListener('scroll', onScroll);
-  }, [onScroll]);
+//   useEffect(() => {
+//     scrollContainer?.current?.addEventListener('scroll', onScroll);
+//     // return () => scrollContainer.current.removeEventListener('scroll', onScroll);
+//   }, [onScroll]);
 
-  return { scrollPosition, documentLength };
-}
+//   return { scrollPosition, documentLength };
+// }

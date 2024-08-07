@@ -6,7 +6,7 @@ import LinesBackground from "@/components/_ui/lines-background"
 import fetchAllLogs from "@/lib/data/fetch-all-logs"
 
 const LogsPage: React.FC = async () => {
-  const articles = await fetchAllLogs()
+  const logs = await fetchAllLogs()
 
   return (
     <LogsImageContextProvider>
@@ -14,8 +14,8 @@ const LogsPage: React.FC = async () => {
         <LinesBackground className="h-line1 sm:h-line1-sm" />
 
         <div className="absolute w-full">
-          {articles.map((article, idx) => {
-            return <LogsTitle log={article} index={idx} key={idx} />
+          {logs.map((log, idx) => {
+            return <LogsTitle log={log} index={idx} key={idx} />
           })}
         </div>
         {/* Image */}

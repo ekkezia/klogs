@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useContext, useRef } from 'react';
 
-function FrozenRouter(props) {
+function FrozenRouter(props: any) {
   const context = useContext(LayoutRouterContext ?? {});
   const frozen = useRef(context).current;
 

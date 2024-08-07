@@ -23,18 +23,18 @@ const config: Config = {
         "line2-sm": "36px",
         line1: "36px",
         "line1-sm": "48px",
-        "iframe": `calc(27 * 4 * 4)`,
-        "iframe-sm": `calc(36 * 4 * 4)`,
+        iframe: `calc(27px * 4 * 4)`,
+        "iframe-sm": `calc(36px * 4 * 4)`,
       },
       width: {
         line2: "27px",
         "line2-sm": "36px",
         line1: "36px",
         "line1-sm": "48px",
-        "content": `calc(100% - (36px * 2))`,
+        content: `calc(100% - (36px * 2))`,
         "content-sm": `calc(100% - (48px * 2))`,
-        "iframe": `calc(27 * 6 * 4)`,
-        "iframe-sm": `calc(36 * 6 * 4)`,
+        iframe: `calc(27px * 6 * 4)`,
+        "iframe-sm": `calc(36px * 6 * 4)`,
       },
       colors: {
         primary: {
@@ -57,7 +57,7 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(function ({ addComponents }) {
+    plugin(function ({ addComponents }: { addComponents: (components: Record<string, any>) => void }) {
       addComponents({
         ".body1": {
           fontFamily: "var(--font-monoton)",
