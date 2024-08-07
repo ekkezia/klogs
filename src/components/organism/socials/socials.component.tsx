@@ -9,7 +9,7 @@ const SOCIAL_LINKS = Object.freeze([
   },
   {
     name: "linkedin",
-    url: "https://www.linkedin.com/company/parallelchain-lab",
+    url: "https://www.linkedin.com/in/elizabeth-kezia-w-622897151",
     symbol: "L",
   },
   {
@@ -24,7 +24,7 @@ const SOCIAL_LINKS = Object.freeze([
   },
   {
     name: "github",
-    url: "https://github.com/parallelchain-io",
+    url: "https://github.com/ekkezia",
     symbol: "K",
   },
 ])
