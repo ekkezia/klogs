@@ -8,6 +8,18 @@ import fetchAllLogs from "@/lib/data/fetch-all-logs"
 const LogsPage: React.FC = async () => {
   const logs = await fetchAllLogs()
 
+  if (!logs) {
+    return (
+      <LogsImageContextProvider>
+        <div className="relative">
+          <LinesBackground className="h-line1 sm:h-line1-sm" />
+
+          <div className="absolute w-full">No logs found 😭</div>
+        </div>
+      </LogsImageContextProvider>
+    )
+  }
+
   return (
     <LogsImageContextProvider>
       <div className="relative">
@@ -19,7 +31,7 @@ const LogsPage: React.FC = async () => {
           })}
         </div>
         {/* Image */}
-        <LogsImage className="fixed left-1/4 sm:left-1/2 top-1/4" />
+        <LogsImage className="fixed left-1/4 top-1/4 sm:left-1/2" />
       </div>
     </LogsImageContextProvider>
   )

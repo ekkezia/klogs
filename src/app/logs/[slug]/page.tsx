@@ -7,22 +7,31 @@ import LogsIframe from "@/components/_ui/logs-iframe"
 import fetchLog from "@/lib/data/fetch-log"
 import fetchAllLogs from "@/lib/data/fetch-all-logs"
 
-export async function generateStaticParams() {
-  try {
-    const logs = await fetchAllLogs()
-    return logs.map((log) => ({
-      slug: log.slug ?? "call-me",
-    }))
-  } catch (error) {
-    console.error("❌ /logs/[slug]: Failed to fetch all logs:", error)
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const logs = await fetchAllLogs()
+
+  if (!logs) {
     return []
   }
+
+  return logs?.map((log) => ({
+    slug: log.slug ?? "call-me",
+  }))
 }
 
 export default async function LogPage({ params }: { params: { slug: string } }) {
   const log = await fetchLog(params.slug)
 
-  const tags = log?.techStacks?.map((tag) => (
+  if (!log) {
+    return (
+      <div className="relative">
+        <LinesBackground className="h-line2 sm:h-line2-sm" />
+        <div className="z-2 pointer-events-auto">No log found 😭</div>
+      </div>
+    )
+  }
+
+  const tags = log.techStacks?.map((tag) => (
     <div
       key={tag.label}
       className="h-line2 w-fit overflow-scroll text-ellipsis border-x border-primary px-4 sm:h-line2-sm"
@@ -41,23 +50,21 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
   ))
 
   return (
-    <>
-      <div className="relative">
-        <LinesBackground className="h-line2 sm:h-line2-sm" />
-        <div className="z-2 pointer-events-auto">
-          <LogsUrl title="🌏 Project URL" href={log.projectUrl} />
-          <LogsUrl title="🐈 Github" href={log.githubUrl} />
+    <div className="relative">
+      <LinesBackground className="h-line2 sm:h-line2-sm" />
+      <div className="z-2 pointer-events-auto">
+        <LogsUrl title="🌏 Project URL" href={log.projectUrl} />
+        <LogsUrl title="🐈 Github" href={log.githubUrl} />
 
-          <LogsIframe url={log.projectUrl} />
+        <LogsIframe url={log.projectUrl} />
 
-          <LogsBlock title="👀 Overview" blocks={log.overview} />
-          <LogsTag title="📚 Tech Stack" content={tags} />
-          <LogsBlock title="🖍️ Description" blocks={log.description} />
+        <LogsBlock title="👀 Overview" blocks={log.overview} />
+        <LogsTag title="📚 Tech Stack" content={tags} />
+        <LogsBlock title="🖍️ Description" blocks={log.description} />
 
-          <LogsTag title="⭐️ Featured In" content={featuredIns} />
-          <LogsBlock title="📝 Notes" blocks={log.notes} />
-        </div>
+        <LogsTag title="⭐️ Featured In" content={featuredIns} />
+        <LogsBlock title="📝 Notes" blocks={log.notes} />
       </div>
-    </>
+    </div>
   )
 }

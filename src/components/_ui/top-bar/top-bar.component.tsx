@@ -5,17 +5,18 @@ import Searchbar from "../searchbar"
 import fetchLog from "@/lib/data/fetch-log"
 import { usePathname } from "next/navigation"
 
+// TODO: review if this can be server action
 const TopBar: React.FC = () => {
   const pathname = usePathname()
-  const [title, setTitle] = useState<string | undefined>(undefined)
+  const [title, setTitle] = useState<string | undefined>("undefined")
   useEffect(() => {
     const fetchAndSetArticleTitle = async () => {
       try {
         const article = await fetchLog(pathname.split("/logs/")[1])
-        console.log("article", article.title)
-        setTitle(article.title)
+        console.log("article", article?.title)
+        setTitle(article?.title)
       } catch (error) {
-        console.error("Failed to fetch article:", error)
+        console.error("❌ top-bar: Failed to fetch article:", error)
       }
     }
 

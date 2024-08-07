@@ -1,6 +1,6 @@
-// import 'server-only';
+// import 'server-only'
 
-import { createClient, type QueryParams } from 'next-sanity';
+import { createClient, type QueryParams } from 'next-sanity'
 
 // const id = nreo0xtv
 export const client = createClient({
