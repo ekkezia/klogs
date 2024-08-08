@@ -12,7 +12,7 @@ const ResizablePanel: React.FC<{
         {leftPanel}left
       </Panel>
       <PanelResizeHandle className="custom-resize-handle" />
-      <Panel className="relative z-[1] bg-primary">{rightPanel}right</Panel>
+      <Panel defaultSize={0} className="relative z-[1] bg-primary">{rightPanel}right</Panel>
     </PanelGroup>
   )
 }

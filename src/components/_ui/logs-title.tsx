@@ -1,15 +1,23 @@
 "use client"
 
+import { useLogTitleContext } from "@/contexts/log-title-context"
 import { useLogsImageContext } from "@/contexts/logs-image-context"
 import { TLog } from "@/types/log-types"
 import Link from "next/link"
-import React from "react"
+import React, { useEffect } from "react"
 
 const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   const { setImageSrc } = useLogsImageContext()
+  const { setTitle, setLoading } = useLogTitleContext()
+
+  useEffect(() => {
+    setLoading(true)
+    setTitle(log.title)
+    setLoading(false)
+  }, [])
 
   const handleMouseEnter = () => {
-    setImageSrc(log?.image)
+    setImageSrc(log.image)
   }
 
   const handleMouseLeave = () => {
@@ -23,7 +31,7 @@ const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="h-line1 sm:h-line1-sm w-line1 sm:w-line1-sm body1 flex items-center justify-center border-r border-primary">
+        <div className="body1 flex h-line1 w-line1 items-center justify-center border-r border-primary sm:h-line1-sm sm:w-line1-sm">
           {index}
         </div>
 

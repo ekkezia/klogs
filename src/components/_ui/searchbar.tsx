@@ -1,14 +1,14 @@
 "use client"
 
+import { useLogTitleContext } from "@/contexts/log-title-context"
 import { usePathname } from "next/navigation"
 
-const Searchbar: React.FC<{ className?: string; placeholder?: string; defaultValue?: string; style?: any }> = ({
+const Searchbar: React.FC<{ className?: string; style?: any }> = ({
   className,
-  defaultValue,
-  placeholder,
   style,
 }) => {
   const pathname = usePathname()
+  const { title, loading } = useLogTitleContext()
 
   if (pathname == "/") {
     return <></>
@@ -20,9 +20,9 @@ const Searchbar: React.FC<{ className?: string; placeholder?: string; defaultVal
         id="search"
         name="search"
         // todo
-        className={"caret-none body1 h-[35.5px] sm:h-[47px] w-full px-4 bg-tertiary"}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
+        className={"caret-none body1 h-[35.5px] w-full bg-tertiary px-4 sm:h-[47px]"}
+        defaultValue={pathname === "/logs" ? "🗒️ Logs" : loading ? "⏳ Loading..." : title!}
+        placeholder={pathname === "/logs" ? "🗒️ Logs" : loading ? "⏳ Loading..." : title!}
       />
     </form>
   )
