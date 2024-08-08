@@ -23,8 +23,8 @@ const config: Config = {
         "line2-sm": "36px",
         line1: "36px",
         "line1-sm": "48px",
-        iframe: `calc(27px * 4 * 4)`,
-        "iframe-sm": `calc(36px * 4 * 4)`,
+        iframe: `calc(27px * 9 * 4 * 0.2)`,
+        "iframe-sm": `calc(36px * 6 * 4)`,
       },
       width: {
         line2: "27px",
@@ -33,8 +33,8 @@ const config: Config = {
         "line1-sm": "48px",
         content: `calc(100% - (36px * 2))`,
         "content-sm": `calc(100% - (48px * 2))`,
-        iframe: `calc(27px * 6 * 4)`,
-        "iframe-sm": `calc(36px * 6 * 4)`,
+        iframe: `calc(27px * 12 * 4 * 0.2)`,
+        "iframe-sm": `calc(36px * 12 * 4)`,
       },
       colors: {
         primary: {
@@ -105,14 +105,32 @@ const config: Config = {
 
         ".h1": {
           fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: "12rem",
+          fontSize: "240px",
           fontWeight: "700",
+          "@media (max-width: 1280px)": {
+            fontSize: "180px",
+          },
+          "@media (max-width: 1024px)": {
+            fontSize: "150px",
+          },
+          "@media (max-width: 768px)": {
+            fontSize: "120px",
+          },
+          "@media (max-width: 640px)": {
+            fontSize: "72px",
+          },
+          "@media (max-width: 425px)": {
+            fontSize: "48px",
+          },
         },
 
         ".h2": {
           fontFamily: "var(--font-bricolage-grotesque)",
           fontSize: "36px",
           fontWeight: "700",
+          "@media (max-width: 425px)": {
+            fontSize: "36px",
+          },
         },
 
         ".h3": {

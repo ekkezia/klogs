@@ -1,11 +1,15 @@
+import dynamic from "next/dynamic"
+
 import LinesBackground from "@/components/_ui/lines-background"
 import LogsUrl from "@/components/_ui/logs-url"
 import LogsTag from "@/components/_ui/logs-tag"
 import LogsBlock from "@/components/_ui/logs-block"
 
-import LogsIframe from "@/components/_ui/logs-iframe"
 import fetchLog from "@/lib/data/fetch-log"
 import fetchAllLogs from "@/lib/data/fetch-all-logs"
+import { Suspense } from "react"
+
+const LogsIframe = dynamic(() => import("@/components/_ui/logs-iframe"), { ssr: false })
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const logs = await fetchAllLogs()
@@ -17,6 +21,14 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return logs?.map((log) => ({
     slug: log.slug ?? "call-me",
   }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const log = await fetchLog(params.slug)
+
+  return {
+    title: log?.title,
+  }
 }
 
 export default async function LogPage({ params }: { params: { slug: string } }) {
@@ -56,7 +68,9 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
         <LogsUrl title="🌏 Project URL" href={log.projectUrl} />
         <LogsUrl title="🐈 Github" href={log.githubUrl} />
 
-        <LogsIframe url={log.projectUrl} />
+        <Suspense fallback={<>⏳</>}>
+          <LogsIframe url={log.projectUrl} />
+        </Suspense>
 
         <LogsBlock title="👀 Overview" blocks={log.overview} />
         <LogsTag title="📚 Tech Stack" content={tags} />

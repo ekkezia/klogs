@@ -41,17 +41,14 @@ const LandingPageHero: React.FC = () => {
   return (
     <main>
       <div
-        className="pointer-events-none absolute flex h-screen w-full flex-col items-center justify-center"
+        className="pointer-events-none absolute z-[11] flex h-screen w-full flex-col items-center justify-center"
         ref={textContainerRef}
-        style={{
-          zIndex: 11,
-        }}
       >
         <Clock />
 
         <h2 className="h2 text-center text-secondary">Kezia</h2>
-        
-        <p className="body1 text-secondary">as of {formatDate(getCurrentDate())}</p>
+
+        <p className="body1 text-center text-secondary">as of {formatDate(getCurrentDate())}</p>
       </div>
     </main>
   )
