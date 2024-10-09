@@ -12,6 +12,12 @@ const MENU = Object.freeze([
     url: "/logs",
     symbol: "🗒️",
   },
+  {
+    name: "sms",
+    url: "/sms",
+    symbol: "💌",
+  },
+
 ])
 
 const Menu: React.FC = () => {
