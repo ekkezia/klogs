@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📝 klogs 
+`klogs` is the portfolio site for my creative coding projects. A play on the word 'log' and inspired by the notebook, I designed the website to resemble the outlook of a notebook. 
+
+Some features you may find in the site are:
+1. Free drawing with `Konva.js` by clicking on the 🖌️ icon at the home page. The drawing can be "erased" and "recovered" by dragging around the yellow dragger on the right side.
+2. Customization of theme color (using `react-colorful`) by clicking the right box at the bottom-right corner.
+
+### Frameworks & Libraries Used
+1. Next.js
+2. Tailwind CSS
+3. Sanity.io
+4. Framer Motion
+5. react-colorful
+6. react-konva
+7. react-resizable-panels
+8. zod
 
 ## Getting Started
 
