@@ -12,6 +12,11 @@ const MENU = Object.freeze([
     url: "/logs",
     symbol: "🗒️",
   },
+  {
+    name: "sms",
+    url: "/sms",
+    symbol: "💌",
+  },
 ])
 
 const Menu: React.FC = () => {
@@ -22,7 +27,7 @@ const Menu: React.FC = () => {
           passHref
           href={url}
           key={name}
-          className={`w-line1 sm:w-line1-sm h-line1 sm:h-line1-sm relative flex items-center justify-center border-b border-primary first:border-t hover:bg-secondary`}
+          className={`relative flex h-line1 w-line1 items-center justify-center border-b border-primary first:border-t hover:bg-secondary sm:h-line1-sm sm:w-line1-sm`}
         >
           <div className="body1 text-primary">{symbol}</div>
         </Link>
