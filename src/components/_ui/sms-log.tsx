@@ -13,6 +13,8 @@ import { formatDate } from "@/utils/dates"
 const ME_EMOJI = ["💋", "🧛🏻‍♀️ ", "🤡", "🐸", "👼🏻", "🍪", "☃️", "🍙", "🍅", "🎱", "🍄", "🐛", "🐠", "🐳", "🦄", "🐝", "🤠"]
 
 const SmsLog: React.FC<{ optimisticSms: TOptimisticSms[] }> = ({ optimisticSms }) => {
+  const sortedSms = optimisticSms?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // descending sort
+
   const senderInfo = (item: TSms) => {
     const randomIndex = randomNumber(0, ME_EMOJI.length - 1)
     const emoji = ME_EMOJI[randomIndex]
@@ -22,16 +24,16 @@ const SmsLog: React.FC<{ optimisticSms: TOptimisticSms[] }> = ({ optimisticSms }
         <span>
           {emoji} {item.name}
         </span>
-        <span className="body3"> 🗓️ {formatDate(item.date)}</span>:
+        <span className="body3"> 🗓️ {item.date ? formatDate(item.date) : "[PENDING]"}</span>:
       </>
     )
   }
   return (
     <div className="w-full" style={{ transform: "translateY(144px)" }}>
       <h3 className="body1 px-4 text-black">Your Logs...</h3>
-      {optimisticSms?.map((item) => (
+      {sortedSms?.map((item) => (
         <div key={item._id}>
-          <div className="relative mx-4 block h-line1 overflow-x-auto sm:h-line1-sm">
+          <div className="relative mx-4 block h-line1 overflow-x-auto overflow-y-hidden sm:h-line1-sm">
             <p className="overflow-x body1 absolute left-0 top-0 z-[11] overflow-y-hidden text-primary">
               <span className="text-secondary">{senderInfo(item)}</span>
             </p>

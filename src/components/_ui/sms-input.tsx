@@ -55,6 +55,7 @@ const SmsInput: React.FC<{ addOptimisticSms: (newSms: TSms) => void }> = ({ addO
         if (formRef.current) {
           formRef.current.reset()
         }
+        if (inputRef.current) inputRef.current.innerText = ""
         setSms("")
         setTypoSms("")
 
