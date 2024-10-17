@@ -7,17 +7,17 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-    /* Primary Colors */
-  --primary-default: #CD2DD8; /* default color: corporate blue */
+  /* Primary Colors */
+  --primary-default: #cd2dd8; /* default color: corporate blue */
 
   /* Secondary Colors */
-  --secondary-default: #EBC67E; /* secondary color: cream yellow */
+  --secondary-default: #ebc67e; /* secondary color: cream yellow */
 
   /* Neutral Colors */
-  --tertiary-default: #FAFAFA;
-  
+  --tertiary-default: #fafafa;
+
   /* Text Colors */
-  --text-primary: #404040; /* Off Black */
+  --text-black: #404040; /* Off Black */
 
   --inner-bar-width: 200px;
   --inner-bar-width-lg: 96px;
@@ -42,7 +42,18 @@
   --z-index-below: -1;
   --z-index-fixed-bars: 10;
   --z-index-modal: 999;
-  
+
+  .expandable-textarea {
+    display: block;
+    overflow: hidden;
+    resize: both;
+    min-height: 48px;
+    line-height: 48px;
+    @media (max-width: 640px) {
+      line-height: 36px;
+      min-height: 36px;
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,6 +61,10 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+
+    --tertiary-default: #404040;
+
+    --text-black: #fafafa; /* Off White */
   }
 }
 
@@ -75,10 +90,9 @@ body {
   position: absolute;
   bottom: 40px;
   left: 50%;
-  width: 20px; 
+  width: 20px;
   height: 20px;
   z-index: 10;
   background: var(--secondary-default); /* Adjust color */
   transform: translate(-50%, -50%);
 }
-
