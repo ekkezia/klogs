@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ['res.cloudinary.com'],
   },
-  reactStrictMode: false,
-  // exportPathMap: function () {
-  //   return {
-  //     '/': { page: '/' },
-  //     // '/blog/nextjs': { page: '/blog/[post]/comment/[id]' },        // wrong
-  //     '/logs/call-me': { page: '/logs/[slug]' }, // correct
-  //   }
-  // },
-}
+    // exportPathMap: function () {
+    //   return {
+    //     '/': { page: '/' },
+    //     // '/blog/nextjs': { page: '/blog/[post]/comment/[id]' },        // wrong
+    //     '/logs/call-me': { page: '/logs/[slug]' }, // correct
+    //   }
+    // },
+};
 
-export default nextConfig
+export default nextConfig;

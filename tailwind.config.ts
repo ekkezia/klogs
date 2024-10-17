@@ -48,7 +48,6 @@ const config: Config = {
         },
         text: {
           primary: "var(--text-primary)", // Off Black
-          black: "var(--text-black)",
         },
       },
       backgroundImage: {
@@ -87,7 +86,6 @@ const config: Config = {
         ".body3": {
           fontFamily: "var(--font-monoton)",
           fontSize: "16px",
-          lineHeight: "16px",
           fontWeight: "400",
           color: "var(--text-primary)",
           "@media (max-width: 640px)": {
