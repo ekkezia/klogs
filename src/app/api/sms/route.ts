@@ -1,4 +1,4 @@
-import { sanityCreate, sanityFetch } from "@/sanity/client"
+import { client, sanityCreate, sanityFetch } from "@/sanity/client"
 import { CreateSanityDocument } from "@/types/sanity-types"
 import { TSmsInput } from "@/types/sms-types"
 import { sanityQueryConfig } from "@/types/sms-types"
@@ -29,9 +29,10 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const data: TSmsInput = await req.json()
+    console.log("data", data)
 
     const newDocument: CreateSanityDocument = {
-      _type: "sms", // document name
+      _type: "sms",
       name: data.name,
       email: data.email,
       date: data.date,
@@ -39,9 +40,7 @@ export async function POST(req: Request) {
       typoSms: data.typoSms,
     }
 
-    const res = await sanityCreate({
-      params: newDocument as unknown as SanityDocument,
-    })
+    const res = await client.create(newDocument)
 
     revalidatePath("api/sms")
     return NextResponse.json({ message: "Received data successfully", res })

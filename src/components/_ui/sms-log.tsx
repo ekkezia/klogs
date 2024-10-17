@@ -30,7 +30,7 @@ const SmsLog: React.FC<{ optimisticSms: TOptimisticSms[] }> = ({ optimisticSms }
     <div className="w-full" style={{ transform: "translateY(144px)" }}>
       <h3 className="body1 px-4 text-black">Your Logs...</h3>
       {optimisticSms?.map((item) => (
-        <>
+        <div key={item._id}>
           <div className="relative mx-4 block h-line1 overflow-x-auto sm:h-line1-sm">
             <p className="overflow-x body1 absolute left-0 top-0 z-[11] overflow-y-hidden text-primary">
               <span className="text-secondary">{senderInfo(item)}</span>
@@ -61,7 +61,7 @@ const SmsLog: React.FC<{ optimisticSms: TOptimisticSms[] }> = ({ optimisticSms }
               <p className="body1 absolute left-0 top-0 z-[11] text-primary">{item.typoSms}</p>
             </div>
           </Tippy>
-        </>
+        </div>
       ))}
     </div>
   )
