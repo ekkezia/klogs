@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge"
 import { TOptimisticSms } from "./sms-client"
 import { revalidatePath } from "next/cache"
 import { randomNumber } from "@/utils/random"
+import { formatDateSanity } from "@/utils/dates"
 
 const alpha = "abcdefghijklmnopqrstuvwxyz"
 const VOWELS = ["a", "e", "i", "o", "u"]
@@ -46,7 +47,7 @@ const SmsInput: React.FC<{ addOptimisticSms: (newSms: TSms) => void }> = ({ addO
 
     startTransition(() => {
       setLoading(true)
-
+      console.log(formatDateSanity(new Date(Date.now())))
       addOptimisticSms(newSms)
     })
 

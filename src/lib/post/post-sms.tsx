@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { API_BASE_URL } from "../../../api"
+import { formatDateSanity } from "@/utils/dates"
 
 export default async function postSms(sms: string, typoSms: string, formData: FormData) {
   const res = await fetch(`${API_BASE_URL}/api/sms`, {
@@ -12,7 +13,7 @@ export default async function postSms(sms: string, typoSms: string, formData: Fo
     body: JSON.stringify({
       name: formData.get("name"),
       email: formData.get("email"),
-      date: Date.now(),
+      date: formatDateSanity(new Date(Date.now())),
       sms: sms,
       typoSms: typoSms,
     }),

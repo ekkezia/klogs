@@ -2,6 +2,7 @@ import { sanityCreate, sanityFetch } from "@/sanity/client"
 import { CreateSanityDocument } from "@/types/sanity-types"
 import { TSmsInput } from "@/types/sms-types"
 import { sanityQueryConfig } from "@/types/sms-types"
+import { SanityDocument } from "next-sanity"
 import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
     const data: TSmsInput = await req.json()
 
     const newDocument: CreateSanityDocument = {
-      _type: "sms", // document name
+      _type: "sms",
       name: data.name,
       email: data.email,
       date: data.date,
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
     }
 
     const res = await sanityCreate({
-      params: newDocument,
+      params: newDocument as unknown as SanityDocument,
     })
 
     revalidatePath("api/sms")

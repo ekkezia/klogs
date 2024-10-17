@@ -1,4 +1,8 @@
 export interface CreateSanityDocument {
   _type: string
-  [key: string]: any
+  name: string
+  email: string
+  date: Date
+  sms: string
+  typoSms: string
 }
