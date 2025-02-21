@@ -5,6 +5,7 @@ import { Stage, Layer, Line } from "react-konva"
 import Konva from "konva"
 import { motion } from "framer-motion"
 import { useThemeContext } from "@/contexts/theme-context"
+import { usePathname } from 'next/navigation'
 
 type Tool = "pen" | "eraser"
 
@@ -25,12 +26,16 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
 
   const isDrawing = React.useRef<boolean>(false)
 
+  const pathname = usePathname();
+
   // Mouse
   const handleMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    isDrawing.current = true
-    const pos = e.target.getStage()?.getPointerPosition()
-    if (pos) {
-      setLines([...lines, { tool, points: [pos.x, pos.y] }])
+    if (pathname === "/") {
+      isDrawing.current = true
+      const pos = e.target.getStage()?.getPointerPosition()
+      if (pos) {
+        setLines([...lines, { tool, points: [pos.x, pos.y] }])
+      }
     }
   }
 
@@ -38,52 +43,61 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
     if (!isDrawing.current) {
       return
     }
-    const stage = e.target.getStage()
-    const point = stage?.getPointerPosition()
-    if (point) {
-      const lastLine = lines[lines.length - 1]
-      if (lastLine) {
-        // add point
-        lastLine.points = lastLine.points.concat([point.x, point.y])
+    if (pathname === "/") {
+      const stage = e.target.getStage()
+      const point = stage?.getPointerPosition()
+      if (point) {
+        const lastLine = lines[lines.length - 1]
+        if (lastLine) {
+          // add point
+          lastLine.points = lastLine.points.concat([point.x, point.y])
 
-        // replace last
-        setLines(lines.slice(0, -1).concat([lastLine]))
+          // replace last
+          setLines(lines.slice(0, -1).concat([lastLine]))
+        }
       }
     }
   }
 
   const handleMouseUp = () => {
-    isDrawing.current = false
+    if (pathname === "/") {
+      isDrawing.current = false
+    }
   }
 
   // Touch (mobile / tablet)
   const handlePointerDown = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
-  isDrawing.current = true;
-  const pos = e.target.getStage()?.getPointerPosition();
-  if (pos) {
-    setLines((prevLines) => [...prevLines, { tool, points: [pos.x, pos.y] }]);
+    if (pathname === "/") {
+    isDrawing.current = true;
+    const pos = e.target.getStage()?.getPointerPosition();
+    if (pos) {
+      setLines((prevLines) => [...prevLines, { tool, points: [pos.x, pos.y] }]);
+    }
   }
 };
 
 const handlePointerMove = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
   if (!isDrawing.current) return;
-
-  const stage = e.target.getStage();
-  const point = stage?.getPointerPosition();
-  if (point) {
-    setLines((prevLines) => {
-      const newLines = [...prevLines];
-      const lastLine = newLines[newLines.length - 1];
-      if (lastLine) {
-        lastLine.points = lastLine.points.concat([point.x, point.y]);
-      }
-      return newLines;
-    });
+    if (pathname === "/") {
+      const stage = e.target.getStage();
+      const point = stage?.getPointerPosition();
+      if (point) {
+        setLines((prevLines) => {
+          const newLines = [...prevLines];
+          const lastLine = newLines[newLines.length - 1];
+          if (lastLine) {
+            lastLine.points = lastLine.points.concat([point.x, point.y]);
+          }
+          return newLines;
+        });
+    }
   }
 };
 
 const handlePointerUp = () => {
-  isDrawing.current = false;
+  if (pathname === "/") {
+    isDrawing.current = false;
+  }
 };
 
   return (
@@ -93,7 +107,7 @@ const handlePointerUp = () => {
         height={window.innerHeight - 48 * 2}
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
-        onMouseup={handleMouseUp}
+        onMouseup={handleMouseUp}l
         onTouchStart={handlePointerDown}
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerUp}

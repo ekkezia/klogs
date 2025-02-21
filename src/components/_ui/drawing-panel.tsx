@@ -17,7 +17,7 @@ const DrawingPanel: React.FC<ILayoutProps> = () => {
   return (
     <div>
       <FreeDrawing
-        className="pointer-events-auto fixed top-0 z-0 h-fit w-content sm:w-content-sm"
+        className={`pointer-events-auto fixed top-0 z-0 h-fit w-content sm:w-content-sm ${pathname === "/" ? "opacity-100" : "opacity-10"}`}
         showToolbar={pathname === "/"}
       />
       {pathname === "/" && (
