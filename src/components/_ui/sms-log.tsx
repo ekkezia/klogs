@@ -2,7 +2,7 @@
 
 import { TSms } from "@/types/sms-types"
 import { randomNumber } from "@/utils/random"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { twMerge } from "tailwind-merge"
 import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
@@ -16,8 +16,12 @@ const SmsLog: React.FC<{ optimisticSms: TOptimisticSms[] }> = ({ optimisticSms }
   const sortedSms = optimisticSms?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // descending sort
 
   const senderInfo = (item: TSms) => {
-    const randomIndex = randomNumber(0, ME_EMOJI.length - 1)
-    const emoji = ME_EMOJI[randomIndex]
+    const [emoji, setEmoji] = useState<string | null>(null);
+
+    useEffect(() => {
+      const randomIndex = randomNumber(0, ME_EMOJI.length - 1)
+      setEmoji(ME_EMOJI[randomIndex])
+    }, [item])
 
     return (
       <>

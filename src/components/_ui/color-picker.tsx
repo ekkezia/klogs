@@ -32,7 +32,7 @@ const ColorPicker: React.FC = () => {
 
     // secondary
     const hsl = hexToHSL(newColor)
-    console.log("hsl", hsl)
+    // console.log("hsl", hsl)
     const secondaryColor = hslToHex((hsl.h - 0.5) % 1, hsl.s, hsl.l)
     document.documentElement.style.setProperty("--secondary-default", secondaryColor)
 

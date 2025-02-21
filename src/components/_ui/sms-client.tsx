@@ -14,7 +14,7 @@ const SmsClient: React.FC<{ allSms: TSmss }> = ({ allSms }) => {
   ])
 
   useEffect(() => {
-    console.log("allSms updated:", allSms)
+    // console.log("allSms updated:", allSms)
   }, [allSms])
 
   const handleAddOptimisticSms = useCallback(

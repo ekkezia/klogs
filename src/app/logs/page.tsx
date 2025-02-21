@@ -1,9 +1,10 @@
 import React from "react"
 import { LogsImageContextProvider } from "@/contexts/logs-image-context"
 import LogsImage from "@/components/_ui/logs-image"
-import LogsTitle from "@/components/_ui/logs-title"
 import LinesBackground from "@/components/_ui/lines-background"
 import fetchAllLogs from "@/lib/data/fetch-all-logs"
+import dynamic from 'next/dynamic';
+import LogsTitle from '@/components/_ui/logs-title'
 
 const LogsPage: React.FC = async () => {
   const logs = await fetchAllLogs()

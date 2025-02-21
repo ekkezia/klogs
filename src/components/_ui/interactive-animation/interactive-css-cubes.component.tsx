@@ -5,6 +5,7 @@ import { useWindowDimensions } from "../../../hooks/useWindowDimensions"
 import { gsap } from "gsap"
 import useBreakpoints from "@/hooks/useBreakpoints"
 import { LINE1_SIZE, LINE1_SIZE_SM } from "@/styles/shared"
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface IInteractiveCssCubesProps {
   color?: string
@@ -52,20 +53,26 @@ const InteractiveCssCubes: React.FC<IInteractiveCssCubesProps> = ({ color, anima
   }, [numberOfCubes])
 
   return (
-    <div className="absolute left-0 top-0 flex flex-wrap items-center justify-center" ref={containerRef}>
-      {[...Array(numberOfCubes.x * numberOfCubes.y)].map((_, index) => {
-        return (
-          <div
-            key={index}
-            className="cube cursor-pointer border border-primary border-b-[0.5] border-l-[0.5] border-r-[0.5] border-t-[0.5] bg-tertiary duration-1000 hover:bg-transparent"
-            style={{
-              width: cubeSize,
-              height: cubeSize,
-            }}
-          />
-        )
-      })}
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1}}
+        transition={{ duration: 0.5}}
+        className="absolute left-0 top-0 flex flex-wrap items-center justify-center" ref={containerRef}>
+        {[...Array(numberOfCubes.x * numberOfCubes.y)].map((_, index) => {
+          return (
+            <div
+              key={index}
+              className="cube cursor-pointer border border-primary border-b-[0.5] border-l-[0.5] border-r-[0.5] border-t-[0.5] bg-tertiary duration-1000 hover:bg-transparent"
+              style={{
+                width: cubeSize,
+                height: cubeSize,
+              }}
+            />
+          )
+        })}
+      </motion.div>
+    </AnimatePresence>
   )
 }
 

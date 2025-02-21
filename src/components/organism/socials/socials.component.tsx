@@ -1,29 +1,32 @@
+'use client'
+
 import React from "react"
 import Link from "next/link"
+import Tippy from '@tippyjs/react'
 
 const SOCIAL_LINKS = Object.freeze([
   {
-    name: "email",
+    name: "Email",
     url: "mailto:e.kezia@gmail.com",
     symbol: "E",
   },
   {
-    name: "linkedin",
+    name: "Linkedin",
     url: "https://www.linkedin.com/in/elizabeth-kezia-w-622897151",
     symbol: "L",
   },
   {
-    name: "instagram",
+    name: "Instagram",
     url: "https://instagram.com/ekezia",
     symbol: "I",
   },
   {
-    name: "portfolio",
+    name: "Photography",
     url: "https://e-kezia.com",
     symbol: "Z",
   },
   {
-    name: "github",
+    name: "Github",
     url: "https://github.com/ekkezia",
     symbol: "K",
   },
@@ -33,6 +36,19 @@ const Socials: React.FC = () => {
   return (
     <div className="fixed top-1/2 flex -translate-y-1/2 transform flex-col items-center">
       {SOCIAL_LINKS.map(({ name, url, symbol }) => (
+          <Tippy
+            theme="custom"
+            content={
+              <div className="h-fit w-fit shadow">
+                <p className="body3 text-primary">{name}</p>
+              </div>
+            }
+            onHidden={(instance) => {
+              instance.unmount()
+            }}
+            placement="right"
+            key={name}
+          >
         <Link
           passHref
           href={url}
@@ -43,6 +59,7 @@ const Socials: React.FC = () => {
         >
           <div className="body1 text-primary">{symbol}</div>
         </Link>
+        </Tippy>
       ))}
     </div>
   )

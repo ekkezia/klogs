@@ -1,20 +1,12 @@
 "use client"
 
-import { useLogTitleContext } from "@/contexts/log-title-context"
 import { useLogsImageContext } from "@/contexts/logs-image-context"
 import { TLog } from "@/types/log-types"
 import Link from "next/link"
-import React, { useEffect } from "react"
+import React from "react"
 
 const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   const { setImageSrc } = useLogsImageContext()
-  const { setTitle, setLoading } = useLogTitleContext()
-
-  useEffect(() => {
-    setLoading(true)
-    setTitle(log.title)
-    setLoading(false)
-  }, [])
 
   const handleMouseEnter = () => {
     setImageSrc(log.image)

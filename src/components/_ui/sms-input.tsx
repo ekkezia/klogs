@@ -45,7 +45,7 @@ const SmsInput: React.FC<{ addOptimisticSms: (newSms: TSms) => void }> = ({ addO
 
     startTransition(() => {
       setLoading(true)
-      console.log(formatDateSanity(new Date(Date.now())))
+      // console.log(formatDateSanity(new Date(Date.now())))
       addOptimisticSms(newSms)
     })
 
@@ -121,7 +121,7 @@ const SmsInput: React.FC<{ addOptimisticSms: (newSms: TSms) => void }> = ({ addO
           {/* Actual Input */}
           <div className={twMerge("pointer-events-auto absolute w-full max-w-full")}>
             <p className={twMerge("body1 z-[10] break-words px-4 text-primary opacity-100")}>
-              {sms ? typoSms : "Leave me your message"}
+              {sms ? typoSms : "✏️ Leave me your message"}
             </p>
 
             {/* Container for Max Character Count and Button */}

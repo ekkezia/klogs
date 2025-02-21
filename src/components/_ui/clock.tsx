@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react"
 
 const Clock: React.FC = () => {
-  const [ctime, setCTime] = useState<string>(new Date().toLocaleTimeString("en-GB"))
+  const [ctime, setCTime] = useState<string>("--:--:--")
 
   useEffect(() => {
     const updateTime = () => {
@@ -14,12 +14,20 @@ const Clock: React.FC = () => {
       setCTime(`${hours}:${minutes}:${seconds}`)
     }
 
+    updateTime();
+
     const intervalId = setInterval(updateTime, 1000)
 
     return () => clearInterval(intervalId)
   }, [])
 
-  return <h1 className="h1 text-secondary">{ctime}</h1>
+  return (
+        <h1
+          className="h1 text-secondary"
+        >
+          {ctime}
+        </h1>
+  )
 }
 
 export default Clock

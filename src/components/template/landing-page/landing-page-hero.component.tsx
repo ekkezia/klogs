@@ -1,10 +1,10 @@
 "use client"
 
 import Clock from "@/components/_ui/clock"
-import useBoolean from "@/hooks/useBoolean"
+import { AnimatePresence, motion } from 'framer-motion'
 import useScrollPosition from "@/hooks/useScrollPosition"
-import getCurrentDate, { formatDate } from "@/utils/dates"
-import { RefObject, useEffect, useRef } from "react"
+import getCurrentDate from "@/utils/dates"
+import { RefObject, useEffect, useRef, useState } from "react"
 
 export const ANIMATION_DURATION = 1
 
@@ -13,20 +13,11 @@ const LandingPageHero: React.FC = () => {
 
   const { scrollPosition } = useScrollPosition()
 
-  // const {
-  //   setTrue: setCountUpIsFinished,
-  //   setFalse: setCountUpIsNotFinished,
-  //   value: countUpIsFinished,
-  // } = useBoolean(false)
+  const [date, setDate] = useState<string | null>(null);
 
-  // const handleCountUpIsFinished = () => {
-  //   setTimeout(
-  //     () => {
-  //       setCountUpIsFinished()
-  //     },
-  //     (ANIMATION_DURATION / 10) * 1000
-  //   )
-  // }
+  useEffect(() => {
+    setDate(getCurrentDate())
+  }, []);
 
   useEffect(() => {
     if (textContainerRef.current) {
@@ -39,18 +30,39 @@ const LandingPageHero: React.FC = () => {
   }, [scrollPosition])
 
   return (
-    <main>
-      <div
-        className="pointer-events-none absolute z-[11] flex h-screen w-full flex-col items-center justify-center"
-        ref={textContainerRef}
-      >
-        <Clock />
+    <AnimatePresence>
+      <main>
+        <div
+          className="pointer-events-none absolute z-[11] flex h-screen w-full flex-col items-center justify-center"
+          ref={textContainerRef}
+        >
+          <motion.div        
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Clock />
+          </motion.div>
 
-        <h2 className="h2 text-center text-secondary">Kezia</h2>
 
-        <p className="body1 text-center text-secondary">as of {formatDate(getCurrentDate())}</p>
-      </div>
-    </main>
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="body1 text-center text-secondary">
+              Elizabeth Kezia
+          </motion.h2>
+
+          <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="body1 text-center text-secondary">
+            as of {date ?? "--/--/--"}
+          </motion.p>
+        </div>
+      </main>
+    </AnimatePresence>
   )
 }
 
