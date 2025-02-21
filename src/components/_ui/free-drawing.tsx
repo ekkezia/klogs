@@ -25,6 +25,7 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
 
   const isDrawing = React.useRef<boolean>(false)
 
+  // Mouse
   const handleMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
     isDrawing.current = true
     const pos = e.target.getStage()?.getPointerPosition()
@@ -55,6 +56,36 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
     isDrawing.current = false
   }
 
+  // Touch (mobile / tablet)
+  const handlePointerDown = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
+  isDrawing.current = true;
+  const pos = e.target.getStage()?.getPointerPosition();
+  if (pos) {
+    setLines((prevLines) => [...prevLines, { tool, points: [pos.x, pos.y] }]);
+  }
+};
+
+const handlePointerMove = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
+  if (!isDrawing.current) return;
+
+  const stage = e.target.getStage();
+  const point = stage?.getPointerPosition();
+  if (point) {
+    setLines((prevLines) => {
+      const newLines = [...prevLines];
+      const lastLine = newLines[newLines.length - 1];
+      if (lastLine) {
+        lastLine.points = lastLine.points.concat([point.x, point.y]);
+      }
+      return newLines;
+    });
+  }
+};
+
+const handlePointerUp = () => {
+  isDrawing.current = false;
+};
+
   return (
     <div className={className} style={style}>
       <Stage
@@ -63,6 +94,9 @@ const FreeDrawing: React.FC<{ className?: string; showToolbar?: boolean; style?:
         onMouseDown={handleMouseDown}
         onMousemove={handleMouseMove}
         onMouseup={handleMouseUp}
+        onTouchStart={handlePointerDown}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={handlePointerUp}
       >
         <Layer>
           {lines.map((line, i) => (
