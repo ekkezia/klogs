@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { "blog-slug": stri
 export default async function ItpBlogByClassPage({ params }: { params: { "class-slug": string; "blog-slug": string } }) {
   const itpBlog = await fetchItpBlog(params["class-slug"], params["blog-slug"])
 
-  if (!itpBlog) {
+  if (!itpBlog || Array.isArray(itpBlog)) {
     return (
       <div className="relative">
         <LinesBackground className="h-line2 sm:h-line2-sm" />
@@ -37,9 +37,9 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
     <div className="relative">
       <LinesBackground className="h-line2 sm:h-line2-sm" />
       <div className="z-2 pointer-events-auto">
-        {/* <LogTitleDynamic title={'aa'} /> */}
+        <LogTitleDynamic title={itpBlog.title} />
 
-        {/* <LogsBlock title="🖍️ Notes" blocks={itpBlog.body} /> */}
+        <LogsBlock title="🖍️ Notes" blocks={itpBlog.body} />
 
       </div>
     </div>
