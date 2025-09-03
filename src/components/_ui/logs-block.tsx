@@ -1,27 +1,38 @@
 import React from "react"
 import { PortableText, PortableTextReactComponents } from "next-sanity"
+import { sanityImage } from "@/sanity/image-builder"
 
-export type TArticleBlock = {
-  _key: string
-  _type: string
-  children: {
-    _key: string
-    _type: string
-    marks: string[]
-    text: string
-  }[]
-  markDefs: {
-    _key: string
-    _type: string
-  }[]
-  style: string
-}[]
+export type TArticleBlock = Array<
+  | {
+      _type: "block" | string;
+      style?: string;
+      children: Array<{
+        _key: string;
+        _type: "span" | string;
+        text: string;
+        marks?: string[];
+      }>;
+      markDefs?: any[];
+      _key?: string;
+    }
+  | {
+      _type: "image";
+      asset: { _ref: string; _type: "reference" };
+      alt?: string;
+    }
+>;
 
 const serializer: Partial<PortableTextReactComponents> = {
   types: {
-    image: ({ value }) => <img src={value.imageUrl} />,
-    callToAction: ({ value, isInline }) =>
-      isInline ? <a href={value.url}>{value.text}</a> : <div className="callToAction">{value.text}</div>,
+    image: ({ value }) => {
+      return (
+        <img
+          src={sanityImage(value)} 
+          alt={value.alt || "Blog image"}
+          className="my-4 rounded-lg"
+        />
+      )
+    },
   },
 
   marks: {

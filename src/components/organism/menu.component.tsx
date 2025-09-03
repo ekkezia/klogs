@@ -15,10 +15,15 @@ const MENU = Object.freeze([
     url: "/logs",
     symbol: "🗒️",
   },
+  // {
+  //   name: "SMS",
+  //   url: "/sms",
+  //   symbol: "💌",
+  // },
   {
-    name: "SMS",
-    url: "/sms",
-    symbol: "💌",
+    name: "ITP Blog",
+    url: "/itp-blog",
+    symbol: "🟪",
   },
 ])
 

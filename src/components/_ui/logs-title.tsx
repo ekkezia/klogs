@@ -1,15 +1,25 @@
 "use client"
 
 import { useLogsImageContext } from "@/contexts/logs-image-context"
+import { TItpClass } from '@/types/itp-class-types'
 import { TLog } from "@/types/log-types"
 import Link from "next/link"
 import React from "react"
 
-const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
+const LogsTitle: React.FC<{ log: TLog | TItpClass; logParentSlug?: string;index: number }> = ({ log, logParentSlug = 'logs', index }) => {
   const { setImageSrc } = useLogsImageContext()
 
+  const slug =
+    typeof log.slug === "string"
+      ? log.slug
+      : typeof log.slug === "object" && log.slug !== null && "current" in log.slug
+      ? (log.slug as { current: string }).current
+      : "";
+
   const handleMouseEnter = () => {
-    setImageSrc(log.image)
+    if (typeof log === 'object' && 'image' in log) {
+      setImageSrc(log.image)
+    }
   }
 
   const handleMouseLeave = () => {
@@ -17,7 +27,7 @@ const LogsTitle: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   }
 
   return (
-    <Link href={`/logs/${log.slug}`} passHref>
+    <Link href={`/${logParentSlug}/${slug}`} passHref>
       <div
         className="flex w-full cursor-pointer bg-transparent duration-1000 hover:bg-secondary"
         onMouseEnter={handleMouseEnter}
