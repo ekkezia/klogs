@@ -13,7 +13,8 @@ export default async function fetchAllItpBlogs() {
   )
 
   if (!res.ok) {
-    throw new Error("❌lib/data/fetch-all-itp-blogs: Failed to fetch logs")
+    return []
+    // throw new Error("❌lib/data/fetch-all-itp-blogs: Failed to fetch logs")
   }
 
   const data: TItpBlogs = await res.json()

@@ -12,7 +12,8 @@ export default async function fetchItpBlog(classSlug: string, blogSlug: string) 
   })
 
   if (!res.ok) {
-    throw new Error("❌lib/data/fetch-itp-blog: Failed to fetch logs")
+    return []
+    // throw new Error("❌lib/data/fetch-itp-blog: Failed to fetch logs")
   }
 
   const data: TItpBlog = await res.json()

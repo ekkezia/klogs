@@ -4,6 +4,8 @@ import LogsBlock from '@/components/_ui/logs-block'
 import fetchAllItpBlogs from '@/lib/data/fetch-all-itp-blogs'
 import fetchItpBlog from '@/lib/data/fetch-itp-blog'
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams(): Promise<{ "class-slug": string; "blog-slug": string }[]> {
   const itpBlogs = await fetchAllItpBlogs()
 
@@ -35,9 +37,9 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
     <div className="relative">
       <LinesBackground className="h-line2 sm:h-line2-sm" />
       <div className="z-2 pointer-events-auto">
-        <LogTitleDynamic title={itpBlog.title} />
+        {/* <LogTitleDynamic title={'aa'} /> */}
 
-        <LogsBlock title="🖍️ Notes" blocks={itpBlog.body} />
+        {/* <LogsBlock title="🖍️ Notes" blocks={itpBlog.body} /> */}
 
       </div>
     </div>

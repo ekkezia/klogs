@@ -12,7 +12,8 @@ export default async function fetchItpClass(classSlug: string) {
   const data = await res.json()
 
   if (!res.ok) {
-    throw new Error("❌ Failed to fetch classes")
+    return []
+    // throw new Error("❌ Failed to fetch classes")
   }
 
   return data as TItpClass[]
