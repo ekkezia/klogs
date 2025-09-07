@@ -3,6 +3,8 @@ import LogsTitle from '@/components/_ui/logs-title'
 import { LogsImageContextProvider } from '@/contexts/logs-image-context'
 import fetchAllItpBlogs from '@/lib/data/fetch-all-itp-blogs'
 
+export const revalidate = 60
+
 export async function generateStaticParams(): Promise<{ "class-slug": string }[]> {
   const itpBlogs = await fetchAllItpBlogs()
 
