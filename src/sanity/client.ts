@@ -25,9 +25,6 @@ export async function sanityFetch<QueryResponse>({
   tags?: string[]
 }) {
   return client.fetch<QueryResponse>(query, params, {
-    next: {
-      revalidate: process.env.NODE_ENV === "development" ? 30 : 30,
-      tags,
-    },
-  })
+  cache: 'no-store',
+})
 }
