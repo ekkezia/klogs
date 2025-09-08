@@ -1,6 +1,7 @@
 import LinesBackground from "@/components/_ui/lines-background"
 import LogTitleDynamic from '@/components/_ui/log-title-dynamic'
 import LogsBlock from '@/components/_ui/logs-block'
+import LogsUrl from '@/components/_ui/logs-url'
 import fetchAllItpBlogs from '@/lib/data/fetch-all-itp-blogs'
 import fetchItpBlog from '@/lib/data/fetch-itp-blog'
 
@@ -35,11 +36,16 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
     )
   }
 
+    console.log('itp url', itpBlog)
+
   return (
     <div className="relative">
       <LinesBackground className="h-line2 sm:h-line2-sm" />
       <div className="z-2 pointer-events-auto">
         <LogTitleDynamic title={itpBlog.title} />
+
+        <LogsUrl title="🌏 Project URL" href={itpBlog.projectUrl} />
+        <LogsUrl title="🐈 Github" href={itpBlog.githubUrl} />
 
         <LogsBlock title="🖍️ Notes" blocks={itpBlog.body} />
 

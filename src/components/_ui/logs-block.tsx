@@ -28,8 +28,20 @@ const serializer: Partial<PortableTextReactComponents> = {
       <img
         src={sanityImage(value)} 
         alt={value.alt || "Blog image"}
-        className="h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]"
+        className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]"
       />
+    ),
+
+    video: ({ value }) => (
+      <>
+        <video controls className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]">
+          <source src={value.url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {value.caption && (
+          <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
+        )}
+      </>
     ),
   },
 
@@ -37,10 +49,8 @@ const serializer: Partial<PortableTextReactComponents> = {
     link: ({ children, value }) => {
       const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined
       return (
-        <a href={value.href} rel={rel}>
-          <div className="inline w-fit cursor-pointer border border-primary px-2 duration-1000 hover:blur-[2px]">
+        <a href={value.href} rel={rel} className="inline w-fit cursor-pointer border border-primary px-2 duration-1000 hover:blur-[2px]">
             {children}
-          </div>
         </a>
       )
     },

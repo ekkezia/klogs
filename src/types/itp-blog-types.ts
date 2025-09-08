@@ -8,6 +8,8 @@ export const ItpBlogSchema = z.object({
   slug: z.object({
     current: z.string(),
   }),
+  projectUrl: z.string().optional(),
+  githubUrl: z.string().optional(),
   date: z.string(),
   tags: z.array(z.string()).optional(),
   class: ItpClassSchema, // reference to class
@@ -76,6 +78,8 @@ export const sanityQueryConfig = (
   const fields = `{
     _id,
     title,
+    projectUrl,
+    githubUrl,
     slug,
     date,
     tags,
