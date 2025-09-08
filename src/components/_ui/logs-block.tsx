@@ -24,15 +24,13 @@ export type TArticleBlock = Array<
 
 const serializer: Partial<PortableTextReactComponents> = {
   types: {
-    image: ({ value }) => {
-      return (
-        <img
-          src={sanityImage(value)} 
-          alt={value.alt || "Blog image"}
-          className="my-4 rounded-lg"
-        />
-      )
-    },
+    image: ({ value }) => (
+      <img
+        src={sanityImage(value)} 
+        alt={value.alt || "Blog image"}
+        className="h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]"
+      />
+    ),
   },
 
   marks: {
@@ -46,6 +44,19 @@ const serializer: Partial<PortableTextReactComponents> = {
         </a>
       )
     },
+    code: ({ children }) => (
+      <code className="font-mono bg-secondary px-1 py-0.5 rounded">
+        {children}
+      </code>
+    ),
+  },
+
+  block: {
+    h4: ({ children }) => (
+      <h4 className="h4 font-bold">
+        {children}
+      </h4>
+    ),
   },
 }
 

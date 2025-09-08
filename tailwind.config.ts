@@ -139,11 +139,17 @@ const config: Config = {
           fontWeight: "700",
         },
 
+        // for block headings
         ".h4": {
-          fontFamily: "var(--font-bricolage-grotesque)",
-          fontSize: "24px",
+          fontFamily: "var(--font-monoton)",
+          fontSize: "60px",
           fontWeight: "700",
-          lineHeight: "36px",
+          lineHeight: "72px",
+          color: "var(--text-primary)",
+          "@media (max-width: 640px)": {
+            fontSize: "40px",
+            lineHeight: "54px",
+          },
         },
       })
     }),

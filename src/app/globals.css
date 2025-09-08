@@ -34,6 +34,12 @@
   --max-content-viewport-height: calc(100vh - (var(--horizontal-bar-height) * 2));
   --heading-height: 100px;
 
+  /* line height */
+  --h-line1: 36px;
+  --h-line1-sm: 48px;
+  --h-line2: 27px;
+  --h-line2-sm: 36px;
+
   /* z index */
   --z-index-above: 1;
   --z-index-fixed-bars: 10;
