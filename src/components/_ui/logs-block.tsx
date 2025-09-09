@@ -34,10 +34,12 @@ const serializer: Partial<PortableTextReactComponents> = {
 
     video: ({ value }) => (
       <>
-        <video controls className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]">
-          <source src={value.url} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <div className="relative h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]">
+        <iframe 
+          className="absolute top-0 left-0 w-full h-full"
+          title="video-player" src={value.url} referrerPolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowFullScreen>
+        </iframe>
+      </div>
         {value.caption && (
           <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
         )}
