@@ -29,7 +29,7 @@ const serializer: Partial<PortableTextReactComponents> = {
         <img
           src={sanityImage(value)} 
           alt={value.alt || "Blog image"}
-          className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]"
+          className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)] object-contain"
         />
         {value.caption && (
           <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
