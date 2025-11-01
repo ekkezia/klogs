@@ -49,6 +49,9 @@
   --z-index-fixed-bars: 10;
   --z-index-modal: 999;
   
+    --font-monoton: 'Kode Mono', monospace;
+    --font-bricolage-grotesque: 'Syne Mono', monospace;
+  
 }
 
 @media (prefers-color-scheme: dark) {
