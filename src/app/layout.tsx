@@ -8,7 +8,7 @@ import { LogTitleContextProvider } from "@/contexts/log-title-context"
 
 const bricolageGrotesque = Syne_Mono({
   display: "swap",
-  preload: true,
+  preload: false,
   subsets: ["latin"],
   variable: "--font-bricolage-grotesque",
   weight: ["400"],
@@ -16,7 +16,7 @@ const bricolageGrotesque = Syne_Mono({
 
 const monoton = Kode_Mono({
   display: "swap",
-  preload: true,
+  preload: false,
   subsets: ["latin"],
   variable: "--font-monoton",
   weight: ["400"],
