@@ -7,7 +7,7 @@ import fetchItpBlog from '@/lib/data/fetch-itp-blog'
 
 export const dynamic = "force-dynamic";
 
-export const revalidate = 60
+export const revalidate = 0
 
 export async function generateStaticParams(): Promise<{ "class-slug": string; "blog-slug": string }[]> {
   const itpBlogs = await fetchAllItpBlogs()

@@ -10,7 +10,7 @@ import fetchAllLogs from "@/lib/data/fetch-all-logs"
 import { Suspense } from "react"
 import LogTitleDynamic from '@/components/_ui/log-title-dynamic'
 
-export const revalidate = 60
+export const revalidate = 0
 
 const LogsIframe = dynamic(() => import("@/components/_ui/logs-iframe"), { ssr: false })
 
@@ -71,6 +71,7 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
         <LogTitleDynamic title={log.title} />
 
         <LogsUrl title="🌏 Project URL" href={log.projectUrl} />
+
         <LogsUrl title="🐈 Github" href={log.githubUrl} />
 
         <Suspense fallback={<>⏳</>}>
@@ -86,5 +87,11 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
         {log.notes && <LogsBlock title="📝 Notes" blocks={log.notes} />}
       </div>
     </div>
+  )
+}
+
+const LogLine = () => {
+  return (
+    <div className="h-line2 sm:h-line2-sm"></div>
   )
 }

@@ -3,13 +3,13 @@ import LogsTitle from '@/components/_ui/logs-title'
 import { LogsImageContextProvider } from '@/contexts/logs-image-context'
 import fetchAllItpBlogs from '@/lib/data/fetch-all-itp-blogs'
 
-export const revalidate = 60
+export const revalidate = 0
 
 export async function generateStaticParams(): Promise<{ "class-slug": string }[]> {
   const itpBlogs = await fetchAllItpBlogs()
 
   const uniqueClassSlugs = Array.from(
-    new Set(itpBlogs.map((blog) => blog.class?.slug.current).filter(Boolean))
+    new Set(itpBlogs.map((blog) => blog.class?.slug?.current).filter(Boolean))
   )
 
   // console.log('🤍 uniqueClassSlugs', uniqueClassSlugs)
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { "class-slug": str
 
 export default async function ItpBlogByClassPage({ params }: { params: { "class-slug": string } }) {
   const itpBlogs = await fetchAllItpBlogs()
-  const itpBlogsByClass = itpBlogs.filter((c) => c.class?.slug.current === params["class-slug"])
+  const itpBlogsByClass = itpBlogs.filter((c) => c.class?.slug?.current === params["class-slug"])
 
   if (!itpBlogs) {
     return (
