@@ -37,19 +37,69 @@ const serializer: Partial<PortableTextReactComponents> = {
       </>
     ),
 
-    video: ({ value }) => (
-      <>
-      <div className="relative h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]">
-        <iframe 
-          className="absolute top-0 left-0 w-full h-full"
-          title="video-player" src={value.url} referrerPolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowFullScreen>
-        </iframe>
-      </div>
-        {value.caption && (
-          <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
-        )}
-      </>
-    ),
+    video: ({ value }) => {
+      const toYouTubeEmbed = (url?: string) => {
+        if (!url) return ""
+        try {
+          const u = new URL(url)
+          const host = u.hostname.replace(/^www\./, "")
+
+          // youtube watch URL
+          if (host.includes("youtube.com")) {
+            if (u.pathname === "/watch") {
+              const v = u.searchParams.get("v")
+              if (v) return `https://www.youtube.com/embed/${v}?rel=0&modestbranding=1&playsinline=1`
+            }
+
+            // shorts URL: /shorts/ID
+            if (u.pathname.startsWith("/shorts/")) {
+              const parts = u.pathname.split("/")
+              const id = parts[2]
+              if (id) return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`
+            }
+
+            // already embed
+            if (u.pathname.startsWith("/embed/")) {
+              const parts = u.pathname.split("/")
+              const id = parts[2]
+              if (id) return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`
+            }
+          }
+
+          // short youtu.be URL
+          if (host === "youtu.be") {
+            const id = u.pathname.replace(/^\//, "")
+            if (id) return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`
+          }
+        } catch (e) {
+          // fallback to regex to extract typical ID (11 chars) from many URL variants
+          const m = url.match(/(?:v=|shorts\/|embed\/|\/)([0-9A-Za-z_-]{11})(?:\?|&|$)/)
+          if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1&playsinline=1`
+        }
+        // if not recognized, return the original URL (it may already be an embed URL)
+        return url
+      }
+
+      const src = toYouTubeEmbed(value?.url)
+
+      return (
+        <>
+          <div className="relative h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)]">
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              title={value?.title || "video-player"}
+              src={src}
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          {value.caption && (
+            <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
+          )}
+        </>
+      )
+    },
   },
 
   marks: {
