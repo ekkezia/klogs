@@ -45,9 +45,28 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
           <LinesBackground className="h-line1 sm:h-line1-sm" />
 
           <div className="absolute w-full">
-            {itpBlogsByClass.map((blog, idx) => {
-              return <LogsTitle logParentSlug={`itp-blog/${params["class-slug"]}`} log={blog} index={idx} key={idx} />
-            })}
+            {[...itpBlogsByClass]
+              .sort((a, b) => {
+                // Extract week number from title (e.g., "Week 1:" -> 1)
+                const getWeekNumber = (title: string): number => {
+                  const match = title.match(/Week\s+(\d+)/i);
+                  return match ? parseInt(match[1], 10) : Infinity;
+                };
+                
+                const weekA = getWeekNumber(a.title);
+                const weekB = getWeekNumber(b.title);
+                
+                // Sort by week number first
+                if (weekA !== weekB) {
+                  return weekA - weekB;
+                }
+                
+                // If no week number or same week, sort alphabetically
+                return a.title.localeCompare(b.title);
+              })
+              .map((blog, idx) => {
+                return <LogsTitle logParentSlug={`itp-blog/${params["class-slug"]}`} log={blog} index={idx} key={idx} />
+              })}
           </div>
         </div>
       </LogsImageContextProvider>

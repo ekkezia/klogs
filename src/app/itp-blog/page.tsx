@@ -26,7 +26,7 @@ const ItpBlogPage: React.FC = async () => {
         <LinesBackground className="h-line1 sm:h-line1-sm" />
 
         <div className="absolute w-full">
-          {itpClasses.map((itpClass, idx) => {
+          {itpClasses.sort((a, b) => a.title.localeCompare(b.title)).map((itpClass, idx) => {
             return <LogsTitle logParentSlug='itp-blog' log={itpClass} index={idx} key={idx} />
           })}
         </div>
