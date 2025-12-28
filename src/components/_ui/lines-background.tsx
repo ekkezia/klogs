@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge"
 
-const arrayLength = 150
+const arrayLength = 400
 
 const LinesBackground: React.FC<{ className?: string }> = ({ className }) => {
   return (

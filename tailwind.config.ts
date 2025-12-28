@@ -151,6 +151,18 @@ const config: Config = {
             lineHeight: "54px",
           },
         },
+
+        ".code": {
+          fontFamily: "var(--font-monoton)",
+          fontSize: "24px",
+          fontWeight: "400",
+          lineHeight: "36px", // must be the same as notes' line height
+          color: "var(--secondary-default)",
+          "@media (max-width: 640px)": {
+            fontSize: "18px",
+            lineHeight: "27px",
+          },
+        },
       })
     }),
   ],

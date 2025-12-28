@@ -121,7 +121,7 @@ const serializer: Partial<PortableTextReactComponents> = {
       )
     },
     code: ({ children }) => (
-      <code className="font-mono bg-secondary px-1 py-0.5 rounded">
+      <code className="code bg-primary">
         {children}
       </code>
     ),
