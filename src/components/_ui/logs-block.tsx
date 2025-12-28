@@ -24,18 +24,27 @@ export type TArticleBlock = Array<
 
 const serializer: Partial<PortableTextReactComponents> = {
   types: {
-    image: ({ value }) => (
-      <>
-        <img
-          src={sanityImage(value)} 
-          alt={value.alt || "Blog image"}
-          className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)] object-contain"
-        />
-        {value.caption && (
-          <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
-        )}
-      </>
-    ),
+    image: ({ value }) => {
+      const imageUrl = sanityImage(value);
+      
+      // Don't render if image URL is invalid
+      if (!imageUrl) {
+        return null;
+      }
+
+      return (
+        <>
+          <img
+            src={imageUrl} 
+            alt={value.alt || "Blog image"}
+            className="relative z-1 h-[calc(var(--h-line2)*10)] sm:h-[calc(var(--h-line2-sm)*10)] object-contain"
+          />
+          {value.caption && (
+            <p className="opacity-80 text-sm relative z-1 h-[calc(var(--h-line2)*1)] sm:h-[calc(var(--h-line2-sm)*1)]">{value.caption}</p>
+          )}
+        </>
+      );
+    },
 
     video: ({ value }) => {
       const toYouTubeEmbed = (url?: string) => {
