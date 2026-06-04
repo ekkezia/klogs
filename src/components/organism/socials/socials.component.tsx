@@ -30,6 +30,11 @@ const SOCIAL_LINKS = Object.freeze([
     url: "https://github.com/ekkezia",
     symbol: "K",
   },
+  {
+    name: "Website",
+    url: "https://e-kezia.com",
+    symbol: "W",
+  },
 ])
 
 const Socials: React.FC = () => {
