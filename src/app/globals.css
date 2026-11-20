@@ -90,3 +90,21 @@ body {
   background: var(--secondary-default); /* Adjust color */
   transform: translate(-50%, -50%);
 }
+/* Ruled lines (see components/_ui/lines-background.tsx) */
+:root {
+  --lines-hair: 1px;
+  --lines-dash: 3px;
+  --lines-gap: 2px;
+}
+.lines-background {
+  /* horizontal dash pattern… */
+  background-image: linear-gradient(to right, var(--primary-default) var(--lines-dash), transparent var(--lines-dash));
+  background-size: calc(var(--lines-dash) + var(--lines-gap)) 100%;
+  /* …only visible on the last hairline of every row */
+  -webkit-mask-image: linear-gradient(to bottom, transparent calc(100% - var(--lines-hair)), #000 calc(100% - var(--lines-hair)));
+  mask-image: linear-gradient(to bottom, transparent calc(100% - var(--lines-hair)), #000 calc(100% - var(--lines-hair)));
+  -webkit-mask-size: 100% var(--lines-h);
+  mask-size: 100% var(--lines-h);
+  -webkit-mask-repeat: repeat-y;
+  mask-repeat: repeat-y;
+}

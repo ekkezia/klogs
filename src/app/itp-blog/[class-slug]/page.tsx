@@ -33,7 +33,7 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
   if (!itpBlogs) {
     return (
       <div className="relative">
-        <LinesBackground className="h-line2 sm:h-line2-sm" />
+        <LinesBackground size="line2" />
         <div className="z-2 body2 pointer-events-auto h-line2 text-primary sm:h-line2-sm">No blog found in this class 😭</div>
       </div>
     )
@@ -42,9 +42,9 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
   return (
       <LogsImageContextProvider>
         <div className="relative">
-          <LinesBackground className="h-line1 sm:h-line1-sm" />
+          <LinesBackground size="line1" />
 
-          <div className="absolute w-full">
+          <div className="relative w-full">
             {[...itpBlogsByClass]
               .sort((a, b) => {
                 // Extract week number from title (e.g., "Week 1:" -> 1)

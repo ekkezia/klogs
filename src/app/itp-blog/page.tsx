@@ -12,7 +12,7 @@ const ItpBlogPage: React.FC = async () => {
     return (
       <LogsImageContextProvider>
         <div className="relative">
-          <LinesBackground className="h-line1 sm:h-line1-sm" />
+          <LinesBackground size="line1" />
 
           <div className="body1 absolute h-line1 w-full text-primary sm:h-line1-sm">No ITP classes found 😭</div>
         </div>
@@ -23,9 +23,9 @@ const ItpBlogPage: React.FC = async () => {
   return (
     <LogsImageContextProvider>
       <div className="relative">
-        <LinesBackground className="h-line1 sm:h-line1-sm" />
+        <LinesBackground size="line1" />
 
-        <div className="absolute w-full">
+        <div className="relative w-full">
           {itpClasses.sort((a, b) => a.title.localeCompare(b.title)).map((itpClass, idx) => {
             return <LogsTitle logParentSlug='itp-blog' log={itpClass} index={idx} key={idx} />
           })}

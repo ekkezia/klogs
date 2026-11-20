@@ -8,7 +8,7 @@ const SmsPage: React.FC = async () => {
 
   return (
     <div className="relative">
-      <LinesBackground className="h-line1 sm:h-line1-sm" />
+      <LinesBackground size="line1" />
 
       <div className="w-full">
         <SmsClient allSms={allSms} />

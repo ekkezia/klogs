@@ -27,7 +27,8 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
           <DrawingPanel />
 
-          <div className="pointer-events-auto">{children}</div>
+          {/* bottom padding = room for the fixed bottom bar, so the last row isn't hidden */}
+          <div className="pointer-events-auto pb-[calc(var(--h-line1)*2)] sm:pb-[calc(var(--h-line1-sm)*2)]">{children}</div>
           {/* <PageTransition className="relative z-[2]">{children}</PageTransition> */}
         </div>
 

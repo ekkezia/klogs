@@ -30,7 +30,7 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
   if (!itpBlog || Array.isArray(itpBlog)) {
     return (
       <div className="relative">
-        <LinesBackground className="h-line2 sm:h-line2-sm" />
+        <LinesBackground size="line2" />
         <div className="z-2 body2 pointer-events-auto h-line2 text-primary sm:h-line2-sm">Nothing written yet in this blog 😭</div>
       </div>
     )
@@ -40,7 +40,7 @@ export default async function ItpBlogByClassPage({ params }: { params: { "class-
 
   return (
     <div className="relative">
-      <LinesBackground className="h-line2 sm:h-line2-sm" />
+      <LinesBackground size="line2" />
       <div className="z-2 pointer-events-auto">
         <LogTitleDynamic title={itpBlog.title} />
 

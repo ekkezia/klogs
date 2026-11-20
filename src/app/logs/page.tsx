@@ -11,7 +11,7 @@ const LogsPage = async ({ searchParams }: { searchParams?: { category?: string }
   if (!logs || logs.length === 0) {
     return (
       <div className="relative">
-        <LinesBackground className="h-line1 sm:h-line1-sm" />
+        <LinesBackground size="line1" />
         <div className="body1 absolute h-line1 w-full text-primary sm:h-line1-sm">No logs found 😭</div>
       </div>
     )
@@ -34,7 +34,7 @@ const LogsPage = async ({ searchParams }: { searchParams?: { category?: string }
 
   return (
     <div className="relative">
-      <LinesBackground className="h-line1 sm:h-line1-sm" />
+      <LinesBackground size="line1" />
 
       {/* Category filter — one ruled row; only shows once logs have categories */}
       {categories.length > 0 && <LogsCategoryBar categories={categories} active={active} total={logs.length} />}

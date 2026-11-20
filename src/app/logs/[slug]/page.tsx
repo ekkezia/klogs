@@ -40,7 +40,7 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
   if (!log) {
     return (
       <div className="relative">
-        <LinesBackground className="h-line2 sm:h-line2-sm" />
+        <LinesBackground size="line2" />
         <div className="z-2 body2 pointer-events-auto h-line2 text-primary sm:h-line2-sm">No log found 😭</div>
       </div>
     )
@@ -66,7 +66,7 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
 
   return (
     <div className="relative">
-      <LinesBackground className="h-line2 sm:h-line2-sm" />
+      <LinesBackground size="line2" />
       <div className="z-2 pointer-events-auto">
         <LogTitleDynamic title={log.title} />
 
