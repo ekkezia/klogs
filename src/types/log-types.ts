@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { LOG_POST_FIELDS, TLogPost } from "./log-sections"
 
 const TechStackSchema = z.object({
   label: z.string(),
@@ -60,7 +61,7 @@ export const LogSchema = z.object({
 export type TLogImage = z.infer<typeof LogImageSchema>
 export type TLogBlock = z.infer<typeof LogBlockSchema>
 
-export type TLog = z.infer<typeof LogSchema>
+export type TLog = z.infer<typeof LogSchema> & TLogPost
 
 export const LogsSchema = z.array(LogSchema)
 
@@ -112,7 +113,8 @@ export const sanityQueryConfig = (
       query = `*[_type == "article"]` + fields
       break
     case "fetchBy":
-      query = `*[_type == "article" && ${fetchBy} == "${fetchByEqualsTo}"]` + fields + "[0]"
+      // single post: list fields + the section-based post fields
+      query = `*[_type == "article" && ${fetchBy} == "${fetchByEqualsTo}"]` + fields.replace(/\}$/, `,${LOG_POST_FIELDS}\n}`) + "[0]"
       break
   }
 

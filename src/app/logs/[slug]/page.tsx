@@ -9,6 +9,7 @@ import fetchLog from "@/lib/data/fetch-log"
 import fetchAllLogs from "@/lib/data/fetch-all-logs"
 import { Suspense } from "react"
 import LogTitleDynamic from '@/components/_ui/log-title-dynamic'
+import { LogPost } from "@/components/log-post/log-post"
 
 export const revalidate = 0
 
@@ -63,6 +64,19 @@ export default async function LogPage({ params }: { params: { slug: string } }) 
       </div>
     </a>
   ))
+
+  // New section-based layout once a log has sections; older logs keep the classic layout.
+  if (log.sections?.length) {
+    return (
+      <div className="relative">
+        <LinesBackground size="line2" />
+        <div className="relative">
+          <LogTitleDynamic title={log.title} />
+          <LogPost log={log} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative">
