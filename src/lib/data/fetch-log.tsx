@@ -1,21 +1,9 @@
 import 'server-only'
 
-import { TLog } from "@/types/log-types"
-import { API_BASE_URL } from "../../../api"
+import { sanityFetch } from "@/sanity/client"
+import { TLog, sanityQueryConfig } from "@/types/log-types"
 
+// Direct Sanity query (see fetch-all-logs.tsx for why we skip /api/logs/[slug]).
 export default async function fetchLog(slug: string) {
-  const res = await fetch(`${API_BASE_URL}/api/logs/${slug}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-
-  if (!res.ok) {
-    throw new Error("❌ lib/data/fetch-log: Failed to fetch logs")
-  }
-
-  const data: TLog = await res.json()
-
-  return data
+  return sanityFetch<TLog | null>({ query: sanityQueryConfig("fetchBy", "slug", slug) })
 }
