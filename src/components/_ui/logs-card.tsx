@@ -3,7 +3,7 @@ import React from "react"
 import { TLog } from "@/types/log-types"
 
 // Layout rules (so everything sits on the dashed LinesBackground):
-// - Every row is a whole number of lines tall (6 for the photo, 1 + 2 + 1 for text).
+// - Every row is a whole number of lines tall (6 for the photo, 1 + 3 + 1 for text).
 // - Horizontal borders are only ever the *bottom* border of a row, which lands on the
 //   same pixel row as the dashed line. The text box's top border is pulled up 1px
 //   (-mt-px) for the same reason.
@@ -43,22 +43,23 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   return (
     <Link href={`/logs/${slug}`} className="group block">
       <article>
-        {/* Photo "pasted" on the page: 6 lines tall, transparent so the lines show through */}
-        <div className="relative flex h-[calc(var(--h-line1)*6)] w-full items-center justify-center px-6 py-4 sm:h-[calc(var(--h-line1-sm)*6)]">
+        {/* Photo "pasted" on the page: the row is 6 lines tall (keeps the grid), the photo
+            itself sits low and pokes ~12px over the text box, above it in z-order */}
+        <div className="relative z-10 flex h-[calc(var(--h-line1)*6)] w-full items-end justify-center px-3 sm:h-[calc(var(--h-line1-sm)*6)]">
           <div
-            className="relative flex max-h-full max-w-full items-center justify-center bg-white p-[6px] shadow-[0_2px_6px_rgba(0,0,0,0.18)] duration-500 group-hover:shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
-            style={{ transform: `rotate(${tilt}deg)` }}
+            className="relative flex max-w-full items-center justify-center bg-white p-[6px] [--photo-overlap:4px] sm:[--photo-overlap:12px] shadow-[0_2px_6px_rgba(0,0,0,0.18)] duration-500 group-hover:shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
+            style={{ transform: `translateY(var(--photo-overlap)) rotate(${tilt}deg)` }}
           >
             {imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={`${imageUrl}${imageUrl.endsWith(".gif") ? "" : "?w=900&auto=format"}`}
+                src={`${imageUrl}${imageUrl.endsWith(".gif") ? "" : "?w=1000&auto=format"}`}
                 alt={log.title}
                 loading={index < 6 ? "eager" : "lazy"}
-                className="block max-h-[calc(var(--h-line1)*6-32px-12px)] max-w-full object-contain sm:max-h-[calc(var(--h-line1-sm)*6-32px-12px)]"
+                className="block max-h-[calc(var(--h-line1)*6-12px)] max-w-full object-contain sm:max-h-[calc(var(--h-line1-sm)*6-12px)]"
               />
             ) : (
-              <div className="flex aspect-[4/3] h-[calc(var(--h-line1)*6-32px-12px)] items-center justify-center bg-secondary p-4 sm:h-[calc(var(--h-line1-sm)*6-32px-12px)]">
+              <div className="flex aspect-[4/3] h-[calc(var(--h-line1)*6-12px)] items-center justify-center bg-secondary p-4 sm:h-[calc(var(--h-line1-sm)*6-12px)]">
                 <span className="h3 text-center text-primary">{log.title}</span>
               </div>
             )}
@@ -66,7 +67,7 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
         </div>
 
         {/* Text box: stays straight */}
-        <div className="-mt-px border-x border-t border-primary bg-tertiary duration-500 group-hover:bg-secondary">
+        <div className="-mt-px border-x border-t border-primary duration-500 group-hover:bg-[color-mix(in_srgb,var(--secondary-default)_45%,transparent)]">
           {/* Title row — 1 line */}
           <div className="flex h-line1 items-center border-b border-primary sm:h-line1-sm">
             <div className="body2 flex h-full w-line1 shrink-0 items-center justify-center border-r border-primary sm:w-line1-sm">
@@ -76,9 +77,11 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
             {year && <span className="body4 shrink-0 px-3 text-primary">{year}</span>}
           </div>
 
-          {/* Blurb — 2 lines */}
-          <div className="flex h-[calc(var(--h-line1)*2)] items-center border-b border-primary px-3 sm:h-[calc(var(--h-line1-sm)*2)]">
-            <p className="body3 line-clamp-3 leading-[1.35] opacity-80">{blurb || "—"}</p>
+          {/* Blurb — 3 ruled rows: line-height = one line, so each text line sits in its own row */}
+          <div className="h-[calc(var(--h-line1)*3)] overflow-hidden border-b border-primary px-3 sm:h-[calc(var(--h-line1-sm)*3)]">
+            <p className="body3 line-clamp-3 leading-[var(--h-line1)] opacity-80 sm:leading-[var(--h-line1-sm)]">
+              {blurb || "—"}
+            </p>
           </div>
 
           {/* Tech row — 1 line */}
