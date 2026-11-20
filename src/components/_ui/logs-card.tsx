@@ -38,17 +38,18 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
   const year = Number.isNaN(parsedYear) ? null : parsedYear
   const techs = (log.techStacks ?? []).map((t) => t.label)
   const blurb = toPlainText(log.overview)
+  const cats = log.categories ?? []
   const tilt = tiltFor(log._id ?? log.title ?? String(index))
 
   return (
     <Link href={`/logs/${slug}`} className="group block">
-      <article>
+      <article className="lg:flex lg:items-stretch">
         {/* Photo "pasted" on the page: the row is 6 lines tall (keeps the grid), the photo
             itself sits low and pokes ~12px over the text box, above it in z-order */}
-        <div className="relative z-10 flex h-[calc(var(--h-line1)*6)] w-full items-end justify-center px-3 sm:h-[calc(var(--h-line1-sm)*6)]">
+        <div className="relative z-10 flex h-[calc(var(--h-line1)*6)] w-full shrink-0 items-end justify-center px-3 sm:h-[calc(var(--h-line1-sm)*6)] lg:w-[40%] lg:items-center lg:justify-center lg:px-4">
           <div
-            className="relative flex max-w-full items-center justify-center bg-white p-[6px] [--photo-overlap:4px] sm:[--photo-overlap:12px] shadow-[0_2px_6px_rgba(0,0,0,0.18)] duration-500 group-hover:shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
-            style={{ transform: `translateY(var(--photo-overlap)) rotate(${tilt}deg)` }}
+            className="relative flex max-w-full items-center justify-center bg-white p-[6px] [--photo-overlap:4px] sm:[--photo-overlap:12px] lg:[--photo-overlap:0px] lg:[--photo-x:16px] shadow-[0_2px_6px_rgba(0,0,0,0.18)] duration-500 group-hover:shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
+            style={{ transform: `translate(var(--photo-x, 0px), var(--photo-overlap)) rotate(${tilt}deg)` }}
           >
             {imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -56,7 +57,7 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
                 src={`${imageUrl}${imageUrl.endsWith(".gif") ? "" : "?w=1000&auto=format"}`}
                 alt={log.title}
                 loading={index < 6 ? "eager" : "lazy"}
-                className="block max-h-[calc(var(--h-line1)*6-12px)] max-w-full object-contain sm:max-h-[calc(var(--h-line1-sm)*6-12px)]"
+                className="block max-h-[calc(var(--h-line1)*6-12px)] max-w-full object-contain sm:max-h-[calc(var(--h-line1-sm)*6-12px)] lg:max-h-[calc(var(--h-line1-sm)*7)]"
               />
             ) : (
               <div className="flex aspect-[4/3] h-[calc(var(--h-line1)*6-12px)] items-center justify-center bg-secondary p-4 sm:h-[calc(var(--h-line1-sm)*6-12px)]">
@@ -67,25 +68,34 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
         </div>
 
         {/* Text box: stays straight */}
-        <div className="-mt-px border-x border-t border-primary duration-500 group-hover:bg-[color-mix(in_srgb,var(--secondary-default)_45%,transparent)]">
+        <div className="-mt-px border-x border-t border-primary duration-500 lg:min-w-0 lg:flex-1 group-hover:bg-[color-mix(in_srgb,var(--secondary-default)_45%,transparent)]">
           {/* Title row — 1 line */}
           <div className="flex h-line1 items-center border-b border-primary sm:h-line1-sm">
-            <div className="body2 flex h-full w-line1 shrink-0 items-center justify-center border-r border-primary sm:w-line1-sm">
+            <div className="body1 flex h-full w-line1 shrink-0 items-center justify-center border-r border-primary sm:w-line1-sm">
               {index}
             </div>
-            <p className="body2 min-w-0 flex-1 truncate px-3">{log.title}</p>
-            {year && <span className="body4 shrink-0 px-3 text-primary">{year}</span>}
+            <p className="body1 min-w-0 flex-1 truncate px-3">{log.title}</p>
+            {(cats.length > 0 || year) && (
+              <span className="body4 flex shrink-0 items-center gap-2 px-3 text-primary">
+                {cats.length > 0 && (
+                  <span className="text-[18px] leading-none" title={cats.map((c) => c.title).join(", ")}>
+                    {cats.map((c) => c.emoji ?? "•").join(" ")}
+                  </span>
+                )}
+                {year}
+              </span>
+            )}
           </div>
 
           {/* Blurb — 3 ruled rows: line-height = one line, so each text line sits in its own row */}
-          <div className="h-[calc(var(--h-line1)*3)] overflow-hidden border-b border-primary px-3 sm:h-[calc(var(--h-line1-sm)*3)]">
-            <p className="body3 line-clamp-3 leading-[var(--h-line1)] opacity-80 sm:leading-[var(--h-line1-sm)]">
+          <div className="h-[calc(var(--h-line1)*3)] overflow-hidden border-b border-primary px-3 sm:h-[calc(var(--h-line1-sm)*3)] lg:h-[calc(var(--h-line1-sm)*4)] lg:pl-8">
+            <p className="body2 line-clamp-3 !leading-[var(--h-line1)] opacity-80 sm:!leading-[var(--h-line1-sm)] lg:line-clamp-4">
               {blurb || "—"}
             </p>
           </div>
 
           {/* Tech row — 1 line */}
-          <div className="flex h-line1 items-center gap-2 overflow-hidden border-b border-primary px-3 sm:h-line1-sm">
+          <div className="flex h-line1 items-center gap-2 overflow-hidden border-b border-primary px-3 sm:h-line1-sm lg:pl-8">
             {techs.slice(0, 3).map((t) => (
               <span key={t} className="body4 shrink-0 whitespace-nowrap border border-primary px-2 py-[2px] text-primary">
                 {t}

@@ -32,6 +32,14 @@ const LogImageSchema = z.object({
   }),
 })
 
+const LogCategorySchema = z.object({
+  title: z.string(),
+  emoji: z.string().nullable().optional(),
+  slug: z.string().nullable().optional(),
+})
+
+export type TLogCategory = z.infer<typeof LogCategorySchema>
+
 export const LogSchema = z.object({
   _id: z.string(),
   date: z.string(),
@@ -45,6 +53,7 @@ export const LogSchema = z.object({
   description: z.array(LogBlockSchema),
   notes: z.array(LogBlockSchema),
   slug: z.string(),
+  categories: z.array(LogCategorySchema).nullable().optional(),
 })
 
 export type TLogImage = z.infer<typeof LogImageSchema>
@@ -90,7 +99,8 @@ export const sanityQueryConfig = (
     },
     description,
     notes,
-    slug
+    slug,
+    "categories": categories[]->{ title, emoji, "slug": slug.current }
 }`
 
   switch (type) {
