@@ -15,13 +15,18 @@ const LogsCategoryBar: React.FC<{
       href={href}
       scroll={false}
       aria-current={isActive ? "page" : undefined}
-      className={`flex h-full min-w-max flex-1 items-center justify-center gap-2 border-r border-primary px-3 last:border-r-0 duration-300 ${
+      className={`flex h-full min-w-max flex-1 items-stretch justify-start border-r border-primary last:border-r-0 duration-300 ${
         isActive ? "bg-primary" : "hover:bg-secondary"
       }`}
     >
-      <span className="text-[20px] leading-none sm:text-[26px]">{emoji}</span>
-      <span className={`body3 whitespace-nowrap ${isActive ? "!text-tertiary" : ""}`}>{label}</span>
-      <span className={`body4 ${isActive ? "!text-tertiary" : "!text-primary"}`}>{count}</span>
+      {/* Emoji gets its own square cell, like the side menu */}
+      <span className="flex w-line1 shrink-0 items-center justify-center border-r border-primary text-[20px] leading-none sm:w-line1-sm sm:text-[26px]">
+        {emoji}
+      </span>
+      <span className="flex items-center gap-2 px-3">
+        <span className={`body3 whitespace-nowrap ${isActive ? "!text-tertiary" : ""}`}>{label}</span>
+        <span className={`body4 ${isActive ? "!text-tertiary" : "!text-primary"}`}>{count}</span>
+      </span>
     </Link>
   )
 

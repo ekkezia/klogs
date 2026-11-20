@@ -36,6 +36,7 @@ const LogCategorySchema = z.object({
   title: z.string(),
   emoji: z.string().nullable().optional(),
   slug: z.string().nullable().optional(),
+  order: z.number().nullable().optional(),
 })
 
 export type TLogCategory = z.infer<typeof LogCategorySchema>
@@ -100,7 +101,7 @@ export const sanityQueryConfig = (
     description,
     notes,
     slug,
-    "categories": categories[]->{ title, emoji, "slug": slug.current }
+    "categories": categories[]->{ title, emoji, "slug": slug.current, order }
 }`
 
   switch (type) {

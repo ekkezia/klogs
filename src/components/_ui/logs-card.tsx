@@ -75,16 +75,17 @@ const LogsCard: React.FC<{ log: TLog; index: number }> = ({ log, index }) => {
               {index}
             </div>
             <p className="body1 min-w-0 flex-1 truncate px-3">{log.title}</p>
-            {(cats.length > 0 || year) && (
-              <span className="body4 flex shrink-0 items-center gap-2 px-3 text-primary">
-                {cats.length > 0 && (
-                  <span className="text-[18px] leading-none" title={cats.map((c) => c.title).join(", ")}>
-                    {cats.map((c) => c.emoji ?? "•").join(" ")}
-                  </span>
-                )}
-                {year}
+            {year && <span className="body4 shrink-0 px-3 text-primary">{year}</span>}
+            {/* One square cell per category emoji, split by lines */}
+            {cats.map((c) => (
+              <span
+                key={c.slug ?? c.title}
+                title={c.title}
+                className="flex h-full w-line1 shrink-0 items-center justify-center border-l border-primary text-[18px] leading-none sm:w-line1-sm sm:text-[22px]"
+              >
+                {c.emoji ?? "•"}
               </span>
-            )}
+            ))}
           </div>
 
           {/* Blurb — 3 ruled rows: line-height = one line, so each text line sits in its own row */}

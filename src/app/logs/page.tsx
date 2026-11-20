@@ -26,7 +26,9 @@ const LogsPage = async ({ searchParams }: { searchParams?: { category?: string }
       byKey.set(key, { ...c, count: (prev?.count ?? 0) + 1 })
     }
   }
-  const categories = Array.from(byKey.values())
+  const categories = Array.from(byKey.values()).sort(
+    (a, b) => (a.order ?? 999) - (b.order ?? 999) || a.title.localeCompare(b.title)
+  )
   const active = searchParams?.category
   const shown = active ? logs.filter((l) => (l.categories ?? []).some((c) => (c.slug ?? c.title) === active)) : logs
 
