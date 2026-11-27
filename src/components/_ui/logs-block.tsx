@@ -1,6 +1,7 @@
 import React from "react"
 import { PortableText, PortableTextReactComponents } from "next-sanity"
 import { sanityImage } from "@/sanity/image-builder"
+import { NoFotoSim } from "@/components/log-post/no-foto-sim"
 
 export type TArticleBlock = Array<
   | {
@@ -24,6 +25,13 @@ export type TArticleBlock = Array<
 
 const serializer: Partial<PortableTextReactComponents> = {
   types: {
+    // native NO FOTO installation study (three.js, client-only); -mx-4 cancels the wrapper's px-4
+    noFotoSim: ({ value }) => (
+      <div className="-mx-4 [--L:var(--h-line2)] sm:[--L:var(--h-line2-sm)]">
+        <NoFotoSim title={value?.title} config={value?.config} initialMode={value?.initialMode} />
+      </div>
+    ),
+
     image: ({ value }) => {
       const imageUrl = sanityImage(value);
       

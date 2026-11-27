@@ -44,6 +44,7 @@ export type TBlock =
     }
   | { _key: string; _type: "modelBlock"; fileUrl: string; poster?: TAsset | null; caption?: string | null; autoRotate?: boolean | null }
   | { _key: string; _type: "embedBlock"; url: string; caption?: string | null; aspect?: "16:9" | "4:3" | "1:1" | "9:16" | null }
+  | { _key: string; _type: "noFotoSim"; title?: string | null; config?: "1" | "3" | null; initialMode?: "gallery" | "plan" | null }
 
 export type TSection = {
   _key: string

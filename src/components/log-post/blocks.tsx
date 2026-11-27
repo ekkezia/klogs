@@ -6,6 +6,7 @@ import { L, Row, RuledBox, pad } from "./grid"
 import { MediaBlock, imgSrc } from "./media"
 import { CodeBlock } from "./code-block"
 import { AnnotatedImage } from "./annotated-image"
+import { NoFotoSim } from "./no-foto-sim"
 
 const ModelBlock = dynamic(() => import("./model-viewer").then((m) => m.ModelBlock), { ssr: false })
 
@@ -206,6 +207,8 @@ export const Block: React.FC<{ block: TBlock }> = ({ block }) => {
       return block.fileUrl ? <ModelBlock {...block} /> : null
     case "embedBlock":
       return block.url ? <Embed url={block.url} caption={block.caption} /> : null
+    case "noFotoSim":
+      return <NoFotoSim title={block.title} config={block.config} initialMode={block.initialMode} />
     default:
       return null
   }
