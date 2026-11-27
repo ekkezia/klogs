@@ -365,6 +365,36 @@ export function mountNoFotoSim(root: HTMLElement, opts: SimOptions): () => void 
     p.position.set(0, CY, 0.35)
     scene.add(p)
     glowLights.push(p)
+    /* camera sign: an invitation to photograph (not crossed out) */
+    {
+      const sc = document.createElement("canvas")
+      sc.width = 256
+      sc.height = 256
+      const g = sc.getContext("2d")!
+      g.fillStyle = "#ebe8e1"
+      g.fillRect(0, 0, 256, 256)
+      g.fillStyle = "#1c1b1a"
+      g.beginPath()
+      g.moveTo(98, 78); g.lineTo(108, 58); g.lineTo(148, 58); g.lineTo(158, 78); g.closePath(); g.fill()
+      g.beginPath()
+      g.roundRect(44, 76, 168, 118, 18)
+      g.fill()
+      g.fillStyle = "#ebe8e1"
+      g.beginPath(); g.arc(128, 135, 40, 0, Math.PI * 2); g.fill()
+      g.fillStyle = "#1c1b1a"
+      g.beginPath(); g.arc(128, 135, 28, 0, Math.PI * 2); g.fill()
+      g.fillStyle = "#ebe8e1"
+      g.beginPath(); g.arc(186, 96, 7, 0, Math.PI * 2); g.fill()
+      const st = new THREE.CanvasTexture(sc)
+      st.colorSpace = THREE.SRGBColorSpace
+      const sx = -tot / 2 - 0.277
+      const sign = new THREE.Mesh(new THREE.PlaneGeometry(0.1, 0.1), new THREE.MeshStandardMaterial({ map: st, roughness: 0.8, emissive: 0xffffff, emissiveMap: st, emissiveIntensity: 0.12 }))
+      sign.position.set(sx, CY, 0.004)
+      stripG.add(sign)
+      const sw = new THREE.Mesh(new THREE.PlaneGeometry(0.1, 0.1), new THREE.MeshBasicMaterial({ map: st }))
+      sw.position.set(sx, CY, 0.004)
+      planObjs.add(sw)
+    }
     solid.add(stripG)
     wire.add(stripWire)
     wire.add(planObjs)
@@ -596,15 +626,16 @@ export function mountNoFotoSim(root: HTMLElement, opts: SimOptions): () => void 
       dim([-h, CY - 0.28, 0.06], [h, CY - 0.28, 0.06], (34.6 * S.n).toFixed(1) + " cm" + (S.n === 3 ? ", one continuous housing" : "")) +
       dim([-wallW / 2, CY + 0.42, 0.02], [wallW / 2, CY + 0.42, 0.02], wallW + " m of wall") +
       dim([h + 0.6, 0, 0.05], [h + 0.6, CY, 0.05], "150 cm to centre") +
-      pin([h, CY + UNIT_H / 2, UNIT_D], 60, -70, `H 8.9 cm · D 2.05 cm · LED ${LED_HZ} Hz`) +
+      pin([h, CY + UNIT_H / 2, UNIT_D], 60, -70, `H 8.9 cm · D ≈ 3.6 cm with controller housing · LED ${LED_HZ} Hz`) +
       pin([h + 0.35, 0.3, 0.03], 60, 10, "wall outlet within 2 m · artist brings 5 V adapter") +
       pin([0, 0, 2], 30, 40, "Clear floor " + hz * 2 + " × 2 m for phones") +
+      pin([-h - 0.277, CY + 0.05, 0.01], -40, -50, "Camera sign 10 × 10 cm, an invitation to photograph") +
       pin(trackPos, 40, -10, "Track lights aimed away · 50–100 lux ambient")
   }
   function drawSpec() {
     const one = S.n === 1
     const rows: [string, string][] = [
-      ["Size", `${one ? "34.6 × 8.9 × 2.05 cm" : "103.8 × 8.9 × 2.05 cm, one housing"} (no rear controller housing)`],
+      ["Size", `${one ? "34.6 × 8.9 × ≈3.6 cm" : "103.8 × 8.9 × ≈3.6 cm, one housing"} (box 2.05 cm + slim controller housing)`],
       ["Wall", `${one ? "0.6 m" : "1.4 m"} wide, centre at 150 cm`],
       ["Floor", `${one ? "2 × 2 m" : "2.4 × 2 m"} clear in front`],
       ["LED", `Flicker at ${LED_HZ} Hz, near phone frame rates (30 or 60 fps)`],
