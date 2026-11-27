@@ -129,7 +129,7 @@ const NoFotoSimClient: React.FC<NoFotoSimProps> = ({ title, config, initialMode 
           two small L brackets carry it from below. Dimensions in mm.
         </p>
         <div className={s.dwg} style={{ marginTop: "var(--nf-L)" }}>
-          <svg data-nf="dwg" viewBox="0 0 960 560" role="img" aria-label="Front, back, section and bottom views of the NO FOTO strip with mounting brackets" />
+          <svg data-nf="dwg" viewBox="0 0 960 800" role="img" aria-label="Front, back, section, bottom and wall elevation views of the NO FOTO strip with mounting brackets" />
         </div>
         <table className={s.hw} style={{ marginTop: "var(--nf-L)" }}>
           <thead>

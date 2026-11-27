@@ -1,4 +1,4 @@
-// Technical drawing of the festival NO FOTO strip, as an SVG string (viewBox 0 0 960 560, units = mm).
+// Technical drawing of the festival NO FOTO strip, as an SVG string (viewBox 0 0 960 800, units = mm).
 // Ported from the "NO FOTO installation study" reference page. From the "box M3 wall" model as recorded:
 // two vertical end posts replace the corner brackets. Colours come from the component's scoped CSS vars.
 export function techDrawingSvg(): string {
@@ -115,6 +115,30 @@ export function techDrawingSvg(): string {
   o += title(ux, uy + 56, "BOTTOM", "Brackets stay inside the box depth, hidden from the front.")
   o += `<line x1="${fx + 8.75}" y1="${fy - 22}" x2="${fx + 8.75}" y2="${fy + 100}" stroke="${mu}" stroke-width=".6" stroke-dasharray="8 3 2 3"/>`
   o += T(fx + 2, fy + 112, "A", 'font-weight="700"') + T(fx + 2, fy - 24, "A", 'font-weight="700"')
+  /* WALL ELEVATION: placement on the wall, 0.9 units per cm */
+  {
+    const k = 0.9, ex = 60, efy = 735, cx = ex + 180
+    const Y = (v: number) => efy - v * k
+    o += `<line x1="${ex - 10}" y1="${efy}" x2="${ex + 370}" y2="${efy}" stroke="${ink}" stroke-width="1.4"/>`
+    for (let x = ex - 8; x < ex + 370; x += 8) o += Ln(x, efy, x + 7, efy + 7, 'stroke-width=".4"')
+    o += T(ex - 8, efy - 6, "FLOOR")
+    o += Ln(ex, Y(150), ex + 360, Y(150), `stroke="${mu}" stroke-dasharray="6 4"`)
+    o += T(ex + 362, Y(150) + 3, "average eye height ≈ 150 cm", `fill="${mu}"`)
+    o += `<rect x="${cx - (103.8 * k) / 2}" y="${Y(150 + 4.45)}" width="${103.8 * k}" height="${8.9 * k}" fill="none" stroke="${ol}" stroke-dasharray="2 1.5"/>`
+    o += `<rect x="${cx - (34.6 * k) / 2}" y="${Y(150 + 4.45)}" width="${34.6 * k}" height="${8.9 * k}" fill="${ol}"/>`
+    o += dV(cx - 70, efy, Y(150), "150 to centre")
+    o += dH(cx - (34.6 * k) / 2, cx + (34.6 * k) / 2, Y(150 + 4.45) - 8, "34.6")
+    o += dH(cx - 30 * k, cx + 30 * k, Y(150 + 4.45) - 30, "60 clear wall")
+    o += lead(cx + (103.8 * k) / 2, Y(150), cx + 75, Y(178), "scaled variation 103.8 (dashed)")
+    const ox = cx + 50 * k
+    o += `<rect x="${ox - 3}" y="${Y(30) - 5}" width="6" height="10" fill="none" stroke="${ink}"/>`
+    o += `<path d="M${cx + (34.6 * k) / 2} ${Y(148)} C ${ox} ${Y(140)}, ${ox} ${Y(80)}, ${ox} ${Y(30) - 5}" fill="none" stroke="${mu}" stroke-dasharray="3 2"/>`
+    o += lead(ox + 3, Y(30), ox + 40, Y(36), "wall outlet ~30 cm: artist's 5 V adapter plugs in here")
+    const vx = cx + 150
+    o += `<g stroke="${mu}" fill="none" stroke-width=".9"><circle cx="${vx}" cy="${Y(160)}" r="${10 * k}"/><line x1="${vx}" y1="${Y(151)}" x2="${vx}" y2="${Y(90)}"/><line x1="${vx}" y1="${Y(90)}" x2="${vx - 8}" y2="${efy}"/><line x1="${vx}" y1="${Y(90)}" x2="${vx + 8}" y2="${efy}"/><line x1="${vx}" y1="${Y(138)}" x2="${vx - 22}" y2="${Y(146)}"/><rect x="${vx - 28}" y="${Y(149)}" width="6" height="4" fill="${mu}"/></g>`
+    o += T(vx + 12, Y(118), "visitor 170 cm", `fill="${mu}"`)
+    o += title(ex, efy + 24, "WALL ELEVATION", "Centre at average eye height, ≈ 150 cm (the usual 57–60 in museum hanging height). Elevation not to the same scale as the views above.")
+  }
   return o
 }
 

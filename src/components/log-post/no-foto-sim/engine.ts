@@ -597,7 +597,7 @@ export function mountNoFotoSim(root: HTMLElement, opts: SimOptions): () => void 
       dim([-wallW / 2, CY + 0.42, 0.02], [wallW / 2, CY + 0.42, 0.02], wallW + " m of wall") +
       dim([h + 0.6, 0, 0.05], [h + 0.6, CY, 0.05], "150 cm to centre") +
       pin([h, CY + UNIT_H / 2, UNIT_D], 60, -70, `H 8.9 cm · D 2.05 cm · LED ${LED_HZ} Hz`) +
-      pin([h + 0.35, 0.3, 0.03], 60, 10, "120 V outlet, within 2 m · 5 V supply in kit") +
+      pin([h + 0.35, 0.3, 0.03], 60, 10, "wall outlet within 2 m · artist brings 5 V adapter") +
       pin([0, 0, 2], 30, 40, "Clear floor " + hz * 2 + " × 2 m for phones") +
       pin(trackPos, 40, -10, "Track lights aimed away · 50–100 lux ambient")
   }
@@ -608,7 +608,7 @@ export function mountNoFotoSim(root: HTMLElement, opts: SimOptions): () => void 
       ["Wall", `${one ? "0.6 m" : "1.4 m"} wide, centre at 150 cm`],
       ["Floor", `${one ? "2 × 2 m" : "2.4 × 2 m"} clear in front`],
       ["LED", `Flicker at ${LED_HZ} Hz, near phone frame rates (30 or 60 fps)`],
-      ["Power", "One 120 V outlet within 2 m; 5 V supply and cables in kit"],
+      ["Power", "Standard wall outlet within 2 m for the artist's 5 V adapter (US outlets are 120 V)"],
       ["Light", "Dim corner, 50–100 lux ambient; no spotlight on the strip"],
       ["Mount", "2 × ¾ in L brackets under the end posts, M3 × 12 up into the posts; see drawing below"],
       ["Hidden text", `<span data-sw></span>${one ? "NO FOTO" : "Instagram Terms of Use license clause, one phrase at a time"}`],
